@@ -100,7 +100,7 @@ function addSharpToPrefix(path) {
 
 /**
  * find language which user config in '_navbar.md'.
- * 
+ *
  * @returns a list of language prefix config in '_navbar.md'
  */
 function resolveLanguagePrefixsFromListItem(translationsListItem) {
@@ -129,7 +129,7 @@ function changeLinkInTranslationsListItem(currrentPath, translationsListItem) {
 }
 
 /**
- * When user click another language in navbar's Translations, 
+ * When user click another language in navbar's Translations,
  * website's path will change to path which corresponding to current language.
  * @param {string} name item name 'Translations' in navbar
  */
@@ -149,7 +149,7 @@ function generateMultipleLanguagesNavbarPluginByListItemName(name) {
                 }
             });
         };
-    
+
         hook.init(bindEventForChangeHrefInNavbar);
     };
 }

@@ -61,34 +61,34 @@ diff_item_module.controller("DiffItemController",
                         namespace.env,
                         namespace.clusterName,
                         namespace.namespaceName).then(function (result) {
-                            loadedNamespaceCnt ++;
-                            result.forEach(function (item) {
-                                if (item.key === "") {
-                                    return
-                                }
-                                var itemsKeyedByClusterName = $scope.itemsKeyedByKey[item.key] || {};
-                                itemsKeyedByClusterName[namespace.env + ':' + namespace.clusterName + ':' + namespace.namespaceName] = item;
-                                $scope.itemsKeyedByKey[item.key] = itemsKeyedByClusterName;
-                            });
-
-                            //After loading all the compared namespaces, check whether the values are consistent
-                            //itemsKeyedByKey struct : itemKey => namespace => item
-                            if (loadedNamespaceCnt === namespaceCnt) {
-                                Object.keys($scope.itemsKeyedByKey).forEach(function (key) {
-                                    let lastValue = null;
-                                    let allEqualed = true;
-                                    Object.values($scope.itemsKeyedByKey[key]).forEach(function (item) {
-                                        if (lastValue == null) {
-                                            lastValue = item.value;
-                                        }
-                                        if (lastValue !== item.value) {
-                                            allEqualed = false;
-                                        }
-                                    })
-                                    $scope.allNamespaceValueEqualed[key]=allEqualed;
-                                })
+                        loadedNamespaceCnt++;
+                        result.forEach(function (item) {
+                            if (item.key === "") {
+                                return
                             }
+                            var itemsKeyedByClusterName = $scope.itemsKeyedByKey[item.key] || {};
+                            itemsKeyedByClusterName[namespace.env + ':' + namespace.clusterName + ':' + namespace.namespaceName] = item;
+                            $scope.itemsKeyedByKey[item.key] = itemsKeyedByClusterName;
                         });
+
+                        //After loading all the compared namespaces, check whether the values are consistent
+                        //itemsKeyedByKey struct : itemKey => namespace => item
+                        if (loadedNamespaceCnt === namespaceCnt) {
+                            Object.keys($scope.itemsKeyedByKey).forEach(function (key) {
+                                let lastValue = null;
+                                let allEqualed = true;
+                                Object.values($scope.itemsKeyedByKey[key]).forEach(function (item) {
+                                    if (lastValue == null) {
+                                        lastValue = item.value;
+                                    }
+                                    if (lastValue !== item.value) {
+                                        allEqualed = false;
+                                    }
+                                })
+                                $scope.allNamespaceValueEqualed[key] = allEqualed;
+                            })
+                        }
+                    });
                 });
                 $scope.syncItemNextStep(1);
             }
@@ -119,6 +119,7 @@ diff_item_module.controller("DiffItemController",
             ////// flow control ///////
 
             $scope.syncItemStep = 1;
+
             function syncItemNextStep(offset) {
                 $scope.syncItemStep += offset;
             }

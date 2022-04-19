@@ -25,9 +25,9 @@ server_config_module.controller('ServerConfigController',
 
             function initPermission() {
                 PermissionService.has_root_permission()
-                .then(function (result) {
-                    $scope.isRootUser = result.hasPermission;
-                })
+                    .then(function (result) {
+                        $scope.isRootUser = result.hasPermission;
+                    })
             }
 
             $scope.create = function () {
@@ -50,11 +50,11 @@ server_config_module.controller('ServerConfigController',
                     $scope.saveBtnDisabled = false;
 
                     if (!result.key) {
-                        toastr.info($translate.instant('ServiceConfig.KeyNotExistsAndCreateTip', { key: $scope.serverConfig.key }));
+                        toastr.info($translate.instant('ServiceConfig.KeyNotExistsAndCreateTip', {key: $scope.serverConfig.key}));
                         return;
                     }
 
-                    toastr.info($translate.instant('ServiceConfig.KeyExistsAndSaveTip', { key: $scope.serverConfig.key }));
+                    toastr.info($translate.instant('ServiceConfig.KeyExistsAndSaveTip', {key: $scope.serverConfig.key}));
                     $scope.serverConfig = result;
                 }, function (result) {
                     AppUtil.showErrorMsg(result);

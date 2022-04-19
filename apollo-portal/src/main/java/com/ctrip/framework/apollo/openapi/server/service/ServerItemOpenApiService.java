@@ -32,71 +32,71 @@ import org.springframework.web.client.HttpStatusCodeException;
 @Service
 public class ServerItemOpenApiService implements ItemOpenApiService {
 
-  private final ItemService itemService;
+    private final ItemService itemService;
 
-  public ServerItemOpenApiService(ItemService itemService) {
-    this.itemService = itemService;
-  }
-
-  @Override
-  public OpenItemDTO getItem(String appId, String env, String clusterName, String namespaceName,
-      String key) {
-    ItemDTO itemDTO = itemService.loadItem(Env.valueOf(env), appId, clusterName, namespaceName, key);
-    return itemDTO == null ? null : OpenApiBeanUtils.transformFromItemDTO(itemDTO);
-  }
-
-  @Override
-  public OpenItemDTO createItem(String appId, String env, String clusterName, String namespaceName,
-      OpenItemDTO itemDTO) {
-
-    ItemDTO toCreate = OpenApiBeanUtils.transformToItemDTO(itemDTO);
-
-    //protect
-    toCreate.setLineNum(0);
-    toCreate.setId(0);
-    toCreate.setDataChangeLastModifiedBy(toCreate.getDataChangeCreatedBy());
-    toCreate.setDataChangeLastModifiedTime(null);
-    toCreate.setDataChangeCreatedTime(null);
-
-    ItemDTO createdItem = itemService.createItem(appId, Env.valueOf(env),
-        clusterName, namespaceName, toCreate);
-    return OpenApiBeanUtils.transformFromItemDTO(createdItem);
-  }
-
-  @Override
-  public void updateItem(String appId, String env, String clusterName, String namespaceName,
-      OpenItemDTO itemDTO) {
-    ItemDTO toUpdateItem = itemService
-        .loadItem(Env.valueOf(env), appId, clusterName, namespaceName, itemDTO.getKey());
-    //protect. only value,comment,lastModifiedBy can be modified
-    toUpdateItem.setComment(itemDTO.getComment());
-    toUpdateItem.setValue(itemDTO.getValue());
-    toUpdateItem.setDataChangeLastModifiedBy(itemDTO.getDataChangeLastModifiedBy());
-
-    itemService.updateItem(appId, Env.valueOf(env), clusterName, namespaceName, toUpdateItem);
-  }
-
-  @Override
-  public void createOrUpdateItem(String appId, String env, String clusterName, String namespaceName,
-      OpenItemDTO itemDTO) {
-    try {
-      this.updateItem(appId, env, clusterName, namespaceName, itemDTO);
-    } catch (Throwable ex) {
-      if (ex instanceof HttpStatusCodeException) {
-        // check createIfNotExists
-        if (((HttpStatusCodeException) ex).getStatusCode().equals(HttpStatus.NOT_FOUND)) {
-          this.createItem(appId, env, clusterName, namespaceName, itemDTO);
-          return;
-        }
-      }
-      throw ex;
+    public ServerItemOpenApiService(ItemService itemService) {
+        this.itemService = itemService;
     }
-  }
 
-  @Override
-  public void removeItem(String appId, String env, String clusterName, String namespaceName,
-      String key, String operator) {
-    ItemDTO toDeleteItem = this.itemService.loadItem(Env.valueOf(env), appId, clusterName, namespaceName, key);
-    this.itemService.deleteItem(Env.valueOf(env), toDeleteItem.getId(), operator);
-  }
+    @Override
+    public OpenItemDTO getItem(String appId, String env, String clusterName, String namespaceName,
+                               String key) {
+        ItemDTO itemDTO = itemService.loadItem(Env.valueOf(env), appId, clusterName, namespaceName, key);
+        return itemDTO == null ? null : OpenApiBeanUtils.transformFromItemDTO(itemDTO);
+    }
+
+    @Override
+    public OpenItemDTO createItem(String appId, String env, String clusterName, String namespaceName,
+                                  OpenItemDTO itemDTO) {
+
+        ItemDTO toCreate = OpenApiBeanUtils.transformToItemDTO(itemDTO);
+
+        //protect
+        toCreate.setLineNum(0);
+        toCreate.setId(0);
+        toCreate.setDataChangeLastModifiedBy(toCreate.getDataChangeCreatedBy());
+        toCreate.setDataChangeLastModifiedTime(null);
+        toCreate.setDataChangeCreatedTime(null);
+
+        ItemDTO createdItem = itemService.createItem(appId, Env.valueOf(env),
+                clusterName, namespaceName, toCreate);
+        return OpenApiBeanUtils.transformFromItemDTO(createdItem);
+    }
+
+    @Override
+    public void updateItem(String appId, String env, String clusterName, String namespaceName,
+                           OpenItemDTO itemDTO) {
+        ItemDTO toUpdateItem = itemService
+                .loadItem(Env.valueOf(env), appId, clusterName, namespaceName, itemDTO.getKey());
+        //protect. only value,comment,lastModifiedBy can be modified
+        toUpdateItem.setComment(itemDTO.getComment());
+        toUpdateItem.setValue(itemDTO.getValue());
+        toUpdateItem.setDataChangeLastModifiedBy(itemDTO.getDataChangeLastModifiedBy());
+
+        itemService.updateItem(appId, Env.valueOf(env), clusterName, namespaceName, toUpdateItem);
+    }
+
+    @Override
+    public void createOrUpdateItem(String appId, String env, String clusterName, String namespaceName,
+                                   OpenItemDTO itemDTO) {
+        try {
+            this.updateItem(appId, env, clusterName, namespaceName, itemDTO);
+        } catch (Throwable ex) {
+            if (ex instanceof HttpStatusCodeException) {
+                // check createIfNotExists
+                if (((HttpStatusCodeException) ex).getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                    this.createItem(appId, env, clusterName, namespaceName, itemDTO);
+                    return;
+                }
+            }
+            throw ex;
+        }
+    }
+
+    @Override
+    public void removeItem(String appId, String env, String clusterName, String namespaceName,
+                           String key, String operator) {
+        ItemDTO toDeleteItem = this.itemService.loadItem(Env.valueOf(env), appId, clusterName, namespaceName, key);
+        this.itemService.deleteItem(Env.valueOf(env), toDeleteItem.getId(), operator);
+    }
 }

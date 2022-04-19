@@ -18,14 +18,14 @@
 <html ng-app="config_export">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="img/config.png">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <link href="img/config.png" rel="icon">
     <!-- styles -->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/angular/angular-toastr-1.4.1.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" media='all' href="vendor/angular/loading-bar.min.css">
-    <link rel="stylesheet" type="text/css" href="styles/common-style.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/angular/angular-toastr-1.4.1.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/angular/loading-bar.min.css" media='all' rel="stylesheet" type="text/css">
+    <link href="styles/common-style.css" rel="stylesheet" type="text/css">
     <title>{{'ConfigExport.Title' | translate }}</title>
 </head>
 
@@ -44,11 +44,11 @@
                     <div class="col-sm-2">
                         <table class="table table-hover">
                             <tbody>
-                            <tr style="cursor: pointer" ng-repeat="env in exportEnvs"
-                                ng-click="toggleEnvCheckedStatus(env)">
-                                <td width="10%"><input type="checkbox" ng-checked="env.checked"
-                                                       ng-click="switchChecked(env, $event)"></td>
-                                <td width="30%" ng-bind="env.name"></td>
+                            <tr ng-click="toggleEnvCheckedStatus(env)" ng-repeat="env in exportEnvs"
+                                style="cursor: pointer">
+                                <td width="10%"><input ng-checked="env.checked" ng-click="switchChecked(env, $event)"
+                                                       type="checkbox"></td>
+                                <td ng-bind="env.name" width="30%"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -57,7 +57,8 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
-                        <a type="button" class="btn btn-primary" ng-click="export()">{{'ConfigExport.Export' | translate }}</a>
+                        <a class="btn btn-primary" ng-click="export()" type="button">{{'ConfigExport.Export' | translate
+                            }}</a>
                         <p class="help-block">（{{'ConfigExport.ExportTips' | translate }}）</p>
                     </div>
                 </div>
@@ -71,11 +72,11 @@
                     <div class="col-sm-2">
                         <table class="table table-hover">
                             <tbody>
-                            <tr style="cursor: pointer" ng-repeat="env in importEnvs"
-                                ng-click="toggleEnvCheckedStatus(env)">
-                                <td width="10%"><input type="checkbox" ng-checked="env.checked"
-                                                       ng-click="switchChecked(env, $event)"></td>
-                                <td width="30%" ng-bind="env.name"></td>
+                            <tr ng-click="toggleEnvCheckedStatus(env)" ng-repeat="env in importEnvs"
+                                style="cursor: pointer">
+                                <td width="10%"><input ng-checked="env.checked" ng-click="switchChecked(env, $event)"
+                                                       type="checkbox"></td>
+                                <td ng-bind="env.name" width="30%"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -85,11 +86,11 @@
                     <label class="col-sm-3 control-label">{{'ConfigExport.ImportConflictLabel' | translate }}</label>
                     <div class="col-sm-9">
                         <div class="radio">
-                            <input type="radio" name="conflictAction" value="ignore" checked ng-model="conflictAction">
+                            <input checked name="conflictAction" ng-model="conflictAction" type="radio" value="ignore">
                             {{'ConfigExport.IgnoreExistedNamespace' | translate }}
                         </div>
                         <div class="radio">
-                            <input type="radio" name="conflictAction" value="cover" ng-model="conflictAction">
+                            <input name="conflictAction" ng-model="conflictAction" type="radio" value="cover">
                             {{'ConfigExport.OverwriteExistedNamespace' | translate }}
                         </div>
                     </div>
@@ -97,13 +98,14 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">{{'ConfigExport.UploadFile' | translate }}</label>
                     <div class="col-sm-9">
-                        <input type="file" id="fileUpload">
+                        <input id="fileUpload" type="file">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label"></label>
                     <div class=" col-sm-9">
-                        <a type="button" class="btn btn-primary" ng-click="import()">{{'ConfigExport.Import' | translate }}</a>
+                        <a class="btn btn-primary" ng-click="import()" type="button">{{'ConfigExport.Import' | translate
+                            }}</a>
                         <br>
                         <p class="help-block">（{{'ConfigExport.ImportTips' | translate }}）</p>
                     </div>
@@ -142,27 +144,27 @@
 <script src="vendor/select2/select2.min.js" type="text/javascript"></script>
 <!--biz-->
 <!--must import-->
-<script type="application/javascript" src="scripts/app.js"></script>
-<script type="application/javascript" src="scripts/services/AppService.js"></script>
-<script type="application/javascript" src="scripts/services/EnvService.js"></script>
-<script type="application/javascript" src="scripts/services/UserService.js"></script>
-<script type="application/javascript" src="scripts/services/CommonService.js"></script>
-<script type="application/javascript" src="scripts/services/PermissionService.js"></script>
-<script type="application/javascript" src="scripts/services/ClusterService.js"></script>
-<script type="application/javascript" src="scripts/services/NamespaceService.js"></script>
-<script type="application/javascript" src="scripts/services/SystemInfoService.js"></script>
-<script type="application/javascript" src="scripts/services/ExportService.js"></script>
+<script src="scripts/app.js" type="application/javascript"></script>
+<script src="scripts/services/AppService.js" type="application/javascript"></script>
+<script src="scripts/services/EnvService.js" type="application/javascript"></script>
+<script src="scripts/services/UserService.js" type="application/javascript"></script>
+<script src="scripts/services/CommonService.js" type="application/javascript"></script>
+<script src="scripts/services/PermissionService.js" type="application/javascript"></script>
+<script src="scripts/services/ClusterService.js" type="application/javascript"></script>
+<script src="scripts/services/NamespaceService.js" type="application/javascript"></script>
+<script src="scripts/services/SystemInfoService.js" type="application/javascript"></script>
+<script src="scripts/services/ExportService.js" type="application/javascript"></script>
 
-<script type="application/javascript" src="scripts/AppUtils.js"></script>
+<script src="scripts/AppUtils.js" type="application/javascript"></script>
 
-<script type="application/javascript" src="scripts/PageCommon.js"></script>
-<script type="application/javascript" src="scripts/directive/directive.js"></script>
-<script type="application/javascript" src="scripts/valdr.js"></script>
+<script src="scripts/PageCommon.js" type="application/javascript"></script>
+<script src="scripts/directive/directive.js" type="application/javascript"></script>
+<script src="scripts/valdr.js" type="application/javascript"></script>
 
-<script type="application/javascript" src="scripts/AppUtils.js"></script>
-<script type="application/javascript" src="scripts/services/OrganizationService.js"></script>
+<script src="scripts/AppUtils.js" type="application/javascript"></script>
+<script src="scripts/services/OrganizationService.js" type="application/javascript"></script>
 
-<script type="application/javascript" src="scripts/controller/ConfigExportController.js"></script>
+<script src="scripts/controller/ConfigExportController.js" type="application/javascript"></script>
 </body>
 
 </html>

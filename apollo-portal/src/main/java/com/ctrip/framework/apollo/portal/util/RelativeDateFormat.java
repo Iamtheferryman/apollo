@@ -26,15 +26,15 @@ import java.util.Date;
 
 
 public class RelativeDateFormat {
-  private static final FastDateFormat TIMESTAMP_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
+    private static final FastDateFormat TIMESTAMP_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
-  private static final String ONE_SECOND_AGO = " seconds ago";
-  private static final String ONE_MINUTE_AGO = " minutes ago";
-  private static final String ONE_HOUR_AGO = " hours ago";
-  private static final String ONE_DAY_AGO = " days ago";
-  private static final String ONE_MONTH_AGO = " months ago";
+    private static final String ONE_SECOND_AGO = " seconds ago";
+    private static final String ONE_MINUTE_AGO = " minutes ago";
+    private static final String ONE_HOUR_AGO = " hours ago";
+    private static final String ONE_DAY_AGO = " days ago";
+    private static final String ONE_MONTH_AGO = " months ago";
 
-  public static String format(Date date) {
+    public static String format(Date date) {
         Instant instant = date.toInstant();
         ZoneId zoneId = ZoneId.systemDefault();
         LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();

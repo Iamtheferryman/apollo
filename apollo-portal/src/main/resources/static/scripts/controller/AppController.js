@@ -87,7 +87,7 @@ function createAppController($scope, $window, $translate, toastr, AppService, Ap
         // owner
         var owner = $('.ownerSelector').select2('data')[0];
         if ($scope.isOpenManageAppMasterRoleLimit) {
-            owner = { id: $scope.currentUser.userId };
+            owner = {id: $scope.currentUser.userId};
         }
         if (!owner) {
             toastr.warning($translate.instant('Common.PleaseChooseOwner'));
@@ -100,7 +100,7 @@ function createAppController($scope, $window, $translate, toastr, AppService, Ap
         $scope.app.admins = [];
         var admins = $(".adminSelector").select2('data');
         if ($scope.isOpenManageAppMasterRoleLimit) {
-            admins = [{ id: $scope.currentUser.userId }];
+            admins = [{id: $scope.currentUser.userId}];
         }
         if (admins) {
             admins.forEach(function (admin) {

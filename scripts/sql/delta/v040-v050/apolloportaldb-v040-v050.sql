@@ -17,6 +17,9 @@
 
 Use ApolloPortalDB;
 
-ALTER TABLE `AppNamespace` ADD KEY `IX_AppId` (`AppId`);
-ALTER TABLE `App` DROP INDEX `Name`;
-ALTER TABLE `App` ADD KEY `Name` (`Name`);
+ALTER TABLE `AppNamespace`
+    ADD KEY `IX_AppId` (`AppId`);
+ALTER TABLE `App`
+    DROP INDEX `Name`;
+ALTER TABLE `App`
+    ADD KEY `Name` (`Name`);

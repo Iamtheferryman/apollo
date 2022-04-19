@@ -27,37 +27,37 @@ import com.ctrip.framework.apollo.core.utils.StringUtils;
  */
 public final class EnvUtils {
 
-  /**
-   * Transforms a given String to its matching {@link Env}
-   *
-   * @param envName the String to convert
-   * @return the matching {@link Env} for the given String
-   */
-  public static Env transformEnv(String envName) {
-    if (StringUtils.isBlank(envName)) {
-      return Env.UNKNOWN;
-    }
+    /**
+     * Transforms a given String to its matching {@link Env}
+     *
+     * @param envName the String to convert
+     * @return the matching {@link Env} for the given String
+     */
+    public static Env transformEnv(String envName) {
+        if (StringUtils.isBlank(envName)) {
+            return Env.UNKNOWN;
+        }
 
-    String cleanedEnvName = envName.trim().toUpperCase();
+        String cleanedEnvName = envName.trim().toUpperCase();
 
-    // fix up in case there is a typo
-    // like prod/pro
-    if (cleanedEnvName.equals("PROD")) {
-      return Env.PRO;
-    }
+        // fix up in case there is a typo
+        // like prod/pro
+        if (cleanedEnvName.equals("PROD")) {
+            return Env.PRO;
+        }
 
-    if (cleanedEnvName.equals("FWS")) {
-      // special case that FAT & FWS
-      // should return the same
-      return Env.FAT;
-    }
+        if (cleanedEnvName.equals("FWS")) {
+            // special case that FAT & FWS
+            // should return the same
+            return Env.FAT;
+        }
 
-    try {
-      return Env.valueOf(cleanedEnvName);
-    } catch (IllegalArgumentException e) {
-      // the name could not be found
-      // or there is a typo we dont handle
-      return Env.UNKNOWN;
+        try {
+            return Env.valueOf(cleanedEnvName);
+        } catch (IllegalArgumentException e) {
+            // the name could not be found
+            // or there is a typo we dont handle
+            return Env.UNKNOWN;
+        }
     }
-  }
 }

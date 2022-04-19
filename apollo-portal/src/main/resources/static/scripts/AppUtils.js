@@ -41,15 +41,15 @@ appUtil.service('AppUtil', ['toastr', '$window', '$q', '$translate', 'prefixLoca
         var d = $q.defer();
         if (requestBody) {
             resource(requestParams, requestBody, function (result) {
-                d.resolve(result);
-            },
+                    d.resolve(result);
+                },
                 function (result) {
                     d.reject(result);
                 });
         } else {
             resource(requestParams, function (result) {
-                d.resolve(result);
-            },
+                    d.resolve(result);
+                },
                 function (result) {
                     d.reject(result);
                 });
@@ -59,7 +59,7 @@ appUtil.service('AppUtil', ['toastr', '$window', '$q', '$translate', 'prefixLoca
     }
 
     return {
-        prefixPath: function(){
+        prefixPath: function () {
             return prefixLocation;
         },
         errorMsg: parseErrorMsg,

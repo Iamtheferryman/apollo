@@ -21,8 +21,8 @@ setting_module.controller('SettingController',
         SettingController]);
 
 function SettingController($scope, $location, $translate, toastr,
-    AppService, AppUtil, PermissionService,
-    OrganizationService) {
+                           AppService, AppUtil, PermissionService,
+                           OrganizationService) {
 
     var params = AppUtil.parseParams($location.$$url);
     var $orgWidget = $('#organization');
@@ -79,10 +79,10 @@ function SettingController($scope, $location, $translate, toastr,
                 $scope.hasAssignUserPermission = result.hasPermission;
 
                 PermissionService.has_open_manage_app_master_role_limit().then(function (value) {
-                     if (!value.isManageAppMasterPermissionEnabled) {
+                    if (!value.isManageAppMasterPermissionEnabled) {
                         $scope.hasManageAppMasterPermission = $scope.hasAssignUserPermission;
                         return;
-                     }
+                    }
 
                     PermissionService.has_manage_app_master_permission($scope.pageContext.appId).then(function (res) {
                         $scope.hasManageAppMasterPermission = res.hasPermission && $scope.hasAssignUserPermission;
@@ -140,7 +140,7 @@ function SettingController($scope, $location, $translate, toastr,
             .then(function (result) {
                 $scope.submitBtnDisabled = false;
                 toastr.success($translate.instant('App.Setting.Added'));
-                $scope.appRoleUsers.masterUsers.push({ userId: toAssignMasterRoleUser });
+                $scope.appRoleUsers.masterUsers.push({userId: toAssignMasterRoleUser});
                 $('.' + $scope.userSelectWidgetId).select2("val", "");
             }, function (result) {
                 $scope.submitBtnDisabled = false;

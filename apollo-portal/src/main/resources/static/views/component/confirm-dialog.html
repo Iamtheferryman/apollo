@@ -1,4 +1,4 @@
-<div class="modal fade" id="{{dialogId}}" tabindex="-1" role="dialog">
+<div class="modal fade" id="{{dialogId}}" role="dialog" tabindex="-1">
     <!--
       ~ Copyright 2021 Apollo Authors
       ~
@@ -18,17 +18,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header panel-primary">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">{{title}}</h4>
             </div>
             <div class="modal-body {{extraClass}}" ng-bind-html="detailAsHtml">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"
-                        ng-show="showCancelBtn" ng-click="cancel()">{{'Common.Cancel' | translate }}</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"
-                        ng-click="confirm()">
+                <button class="btn btn-default" data-dismiss="modal" ng-click="cancel()"
+                        ng-show="showCancelBtn" type="button">{{'Common.Cancel' | translate }}
+                </button>
+                <button class="btn btn-danger" data-dismiss="modal" ng-click="confirm()"
+                        type="button">
                     {{confirmBtnText}}
                 </button>
             </div>

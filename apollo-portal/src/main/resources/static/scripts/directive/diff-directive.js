@@ -32,7 +32,6 @@ directive_module.directive('apollodiff',
                 scope.$watch('newStr', makeDiff);
 
 
-
                 function makeDiff() {
                     var displayArea = document.getElementById(scope.apolloId);
                     if (!displayArea) {

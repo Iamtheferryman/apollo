@@ -19,12 +19,12 @@ var prefixPath = window.localStorage.getItem("prefixPath") || "";
 /**utils*/
 var appUtil = angular.module('app.util', ['toastr', 'ngCookies', 'pascalprecht.translate'])
     .constant("prefixLocation", prefixPath)      // 前缀路径
-    .filter('prefixPath',['prefixLocation', function(prefixLocation) {   // 前缀路径过滤器
-        return function(text) {
+    .filter('prefixPath', ['prefixLocation', function (prefixLocation) {   // 前缀路径过滤器
+        return function (text) {
             return prefixLocation + text;
         }
     }])
-    .config(['$translateProvider','prefixLocation', function ($translateProvider,prefixLocation) {
+    .config(['$translateProvider', 'prefixLocation', function ($translateProvider, prefixLocation) {
 
         $translateProvider.useSanitizeValueStrategy(null); // disable sanitization by default
         $translateProvider.useCookieStorage();
@@ -33,11 +33,11 @@ var appUtil = angular.module('app.util', ['toastr', 'ngCookies', 'pascalprecht.t
             suffix: '.json'
         });
         $translateProvider.registerAvailableLanguageKeys(['en', 'zh-CN'], {
-                              'zh-*': 'zh-CN',
-                              'zh': 'zh-CN',
-                              'en-*': 'en',
-                              "*": "en"
-                            })
+            'zh-*': 'zh-CN',
+            'zh': 'zh-CN',
+            'en-*': 'en',
+            "*": "en"
+        })
         $translateProvider.uniformLanguageTag('bcp47').determinePreferredLanguage();
     }]);
 
@@ -55,7 +55,7 @@ var index_module = angular.module('index', ['toastr', 'app.service', 'apollo.dir
 //项目主页
 var application_module = angular.module('application', ['app.service', 'apollo.directive', 'app.util', 'toastr', 'angular-loading-bar', 'valdr', 'ui.ace', 'ngSanitize']);
 //创建项目页面
-var app_module = angular.module('create_app', ['apollo.directive', 'toastr', 'app.service', 'app.util', 'angular-loading-bar', 'valdr','pascalprecht.translate']);
+var app_module = angular.module('create_app', ['apollo.directive', 'toastr', 'app.service', 'app.util', 'angular-loading-bar', 'valdr', 'pascalprecht.translate']);
 //配置同步页面
 var sync_item_module = angular.module('sync_item', ['app.service', 'apollo.directive', 'app.util', 'toastr', 'angular-loading-bar']);
 // 比较页面

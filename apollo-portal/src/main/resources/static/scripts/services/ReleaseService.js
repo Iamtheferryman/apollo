@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($resource, $q,AppUtil) {
+appService.service('ReleaseService', ['$resource', '$q', 'AppUtil', function ($resource, $q, AppUtil) {
     var resource = $resource('', {}, {
         get: {
             method: 'GET',
@@ -51,15 +51,15 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function createRelease(appId, env, clusterName, namespaceName, releaseTitle, comment, isEmergencyPublish) {
         var d = $q.defer();
         resource.release({
-                             appId: appId,
-                             env: env,
-                             clusterName: clusterName,
-                             namespaceName: namespaceName
-                         }, {
-                             releaseTitle: releaseTitle,
-                             releaseComment: comment,
-                             isEmergencyPublish: isEmergencyPublish
-                         }, function (result) {
+            appId: appId,
+            env: env,
+            clusterName: clusterName,
+            namespaceName: namespaceName
+        }, {
+            releaseTitle: releaseTitle,
+            releaseComment: comment,
+            isEmergencyPublish: isEmergencyPublish
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -70,16 +70,16 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function createGrayRelease(appId, env, clusterName, namespaceName, branchName, releaseTitle, comment, isEmergencyPublish) {
         var d = $q.defer();
         resource.gray_release({
-                                  appId: appId,
-                                  env: env,
-                                  clusterName: clusterName,
-                                  namespaceName: namespaceName,
-                                  branchName: branchName
-                              }, {
-                                  releaseTitle: releaseTitle,
-                                  releaseComment: comment,
-                                  isEmergencyPublish: isEmergencyPublish
-                              }, function (result) {
+            appId: appId,
+            env: env,
+            clusterName: clusterName,
+            namespaceName: namespaceName,
+            branchName: branchName
+        }, {
+            releaseTitle: releaseTitle,
+            releaseComment: comment,
+            isEmergencyPublish: isEmergencyPublish
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -90,9 +90,9 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function get(env, releaseId) {
         var d = $q.defer();
         resource.get({
-                         env: env,
-                         releaseId: releaseId
-                         }, function (result) {
+            env: env,
+            releaseId: releaseId
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -103,13 +103,13 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function findAllReleases(appId, env, clusterName, namespaceName, page, size) {
         var d = $q.defer();
         resource.find_all_releases({
-                                       appId: appId,
-                                       env: env,
-                                       clusterName: clusterName,
-                                       namespaceName: namespaceName,
-                                       page: page,
-                                       size: size
-                                   }, function (result) {
+            appId: appId,
+            env: env,
+            clusterName: clusterName,
+            namespaceName: namespaceName,
+            page: page,
+            size: size
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -120,13 +120,13 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function findActiveReleases(appId, env, clusterName, namespaceName, page, size) {
         var d = $q.defer();
         resource.find_active_releases({
-                                          appId: appId,
-                                          env: env,
-                                          clusterName: clusterName,
-                                          namespaceName: namespaceName,
-                                          page: page,
-                                          size: size
-                                      }, function (result) {
+            appId: appId,
+            env: env,
+            clusterName: clusterName,
+            namespaceName: namespaceName,
+            page: page,
+            size: size
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -137,13 +137,13 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function findLatestActiveRelease(appId, env, clusterName, namespaceName) {
         var d = $q.defer();
         resource.find_active_releases({
-                                          appId: appId,
-                                          env: env,
-                                          clusterName: clusterName,
-                                          namespaceName: namespaceName,
-                                          page: 0,
-                                          size: 1
-                                      }, function (result) {
+            appId: appId,
+            env: env,
+            clusterName: clusterName,
+            namespaceName: namespaceName,
+            page: 0,
+            size: 1
+        }, function (result) {
             if (result && result.length) {
                 d.resolve(result[0]);
             }
@@ -160,10 +160,10 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function compare(env, baseReleaseId, toCompareReleaseId) {
         var d = $q.defer();
         resource.compare({
-                             env: env,
-                             baseReleaseId: baseReleaseId,
-                             toCompareReleaseId: toCompareReleaseId
-                         }, function (result) {
+            env: env,
+            baseReleaseId: baseReleaseId,
+            toCompareReleaseId: toCompareReleaseId
+        }, function (result) {
             d.resolve(result);
         }, function (result) {
             d.reject(result);
@@ -174,13 +174,13 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function rollback(env, releaseId) {
         var d = $q.defer();
         resource.rollback({
-                              env: env,
-                              releaseId: releaseId
-                          }, {}, function (result) {
-                              d.resolve(result);
-                          }, function (result) {
-                              d.reject(result);
-                          }
+                env: env,
+                releaseId: releaseId
+            }, {}, function (result) {
+                d.resolve(result);
+            }, function (result) {
+                d.reject(result);
+            }
         );
         return d.promise;
 
@@ -189,14 +189,14 @@ appService.service('ReleaseService', ['$resource', '$q','AppUtil', function ($re
     function rollbackTo(env, releaseId, toReleaseId) {
         var d = $q.defer();
         resource.rollback({
-                              env: env,
-                              releaseId: releaseId,
-                              toReleaseId: toReleaseId
-                          }, {}, function (result) {
-                              d.resolve(result);
-                          }, function (result) {
-                              d.reject(result);
-                          }
+                env: env,
+                releaseId: releaseId,
+                toReleaseId: toReleaseId
+            }, {}, function (result) {
+                d.resolve(result);
+            }, function (result) {
+                d.reject(result);
+            }
         );
         return d.promise;
 

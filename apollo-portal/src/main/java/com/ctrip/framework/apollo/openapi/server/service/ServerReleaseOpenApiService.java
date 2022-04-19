@@ -32,40 +32,40 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ServerReleaseOpenApiService implements ReleaseOpenApiService {
-  private final ReleaseService releaseService;
+    private final ReleaseService releaseService;
 
-  public ServerReleaseOpenApiService(
-      ReleaseService releaseService) {
-    this.releaseService = releaseService;
-  }
-
-  @Override
-  public OpenReleaseDTO publishNamespace(String appId, String env, String clusterName,
-      String namespaceName, NamespaceReleaseDTO releaseDTO) {
-    NamespaceReleaseModel releaseModel = BeanUtils.transform(NamespaceReleaseModel.class, releaseDTO);
-
-    releaseModel.setAppId(appId);
-    releaseModel.setEnv(Env.valueOf(env).toString());
-    releaseModel.setClusterName(clusterName);
-    releaseModel.setNamespaceName(namespaceName);
-
-    return OpenApiBeanUtils.transformFromReleaseDTO(releaseService.publish(releaseModel));
-  }
-
-  @Override
-  public OpenReleaseDTO getLatestActiveRelease(String appId, String env, String clusterName,
-      String namespaceName) {
-    ReleaseDTO releaseDTO = releaseService.loadLatestRelease(appId, Env.valueOf
-        (env), clusterName, namespaceName);
-    if (releaseDTO == null) {
-      return null;
+    public ServerReleaseOpenApiService(
+            ReleaseService releaseService) {
+        this.releaseService = releaseService;
     }
 
-    return OpenApiBeanUtils.transformFromReleaseDTO(releaseDTO);
-  }
+    @Override
+    public OpenReleaseDTO publishNamespace(String appId, String env, String clusterName,
+                                           String namespaceName, NamespaceReleaseDTO releaseDTO) {
+        NamespaceReleaseModel releaseModel = BeanUtils.transform(NamespaceReleaseModel.class, releaseDTO);
 
-  @Override
-  public void rollbackRelease(String env, long releaseId, String operator) {
-    releaseService.rollback(Env.valueOf(env), releaseId, operator);
-  }
+        releaseModel.setAppId(appId);
+        releaseModel.setEnv(Env.valueOf(env).toString());
+        releaseModel.setClusterName(clusterName);
+        releaseModel.setNamespaceName(namespaceName);
+
+        return OpenApiBeanUtils.transformFromReleaseDTO(releaseService.publish(releaseModel));
+    }
+
+    @Override
+    public OpenReleaseDTO getLatestActiveRelease(String appId, String env, String clusterName,
+                                                 String namespaceName) {
+        ReleaseDTO releaseDTO = releaseService.loadLatestRelease(appId, Env.valueOf
+                (env), clusterName, namespaceName);
+        if (releaseDTO == null) {
+            return null;
+        }
+
+        return OpenApiBeanUtils.transformFromReleaseDTO(releaseDTO);
+    }
+
+    @Override
+    public void rollbackRelease(String env, long releaseId, String operator) {
+        releaseService.rollback(Env.valueOf(env), releaseId, operator);
+    }
 }

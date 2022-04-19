@@ -20,11 +20,11 @@ import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends AbstractApolloHttpException {
 
-  /**
-   * @see AbstractApolloHttpException#AbstractApolloHttpException(String, Object...)
-   */
-  public NotFoundException(String msgtpl, Object... args) {
-    super(msgtpl, args);
-    setHttpStatus(HttpStatus.NOT_FOUND);
-  }
+    /**
+     * @see AbstractApolloHttpException#AbstractApolloHttpException(String, Object...)
+     */
+    public NotFoundException(String msgtpl, Object... args) {
+        super(msgtpl, args);
+        setHttpStatus(HttpStatus.NOT_FOUND);
+    }
 }

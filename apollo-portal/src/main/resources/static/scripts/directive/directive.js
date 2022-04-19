@@ -17,7 +17,7 @@
 /** navbar */
 directive_module.directive('apollonav',
     function ($compile, $window, $translate, toastr, AppUtil, AppService, EnvService,
-        UserService, CommonService, PermissionService) {
+              UserService, CommonService, PermissionService) {
         return {
             restrict: 'E',
             templateUrl: AppUtil.prefixPath() + '/views/common/nav.html',
@@ -29,22 +29,23 @@ directive_module.directive('apollonav',
                     scope.pageSetting = setting;
                 });
 
-               // Looks like a trick to make xml/yml/json namespaces display right, but why?
-               $(document).on('click', function () {
-                   scope.$apply(function () {});
-               });
+                // Looks like a trick to make xml/yml/json namespaces display right, but why?
+                $(document).on('click', function () {
+                    scope.$apply(function () {
+                    });
+                });
 
-               $translate('ApolloConfirmDialog.SearchPlaceHolder').then(function(placeholderLabel)  {
-                   $('#app-search-list').select2({
-                      placeholder: placeholderLabel,
-                      ajax: {
-                        url: AppUtil.prefixPath() + "/apps/search/by-appid-or-name",
-                        dataType: 'json',
-                        delay: 400,
-                        data: function (params) {
-                            return {
-                                query: params.term || '',
-                                page: params.page ? params.page - 1 : 0,
+                $translate('ApolloConfirmDialog.SearchPlaceHolder').then(function (placeholderLabel) {
+                    $('#app-search-list').select2({
+                        placeholder: placeholderLabel,
+                        ajax: {
+                            url: AppUtil.prefixPath() + "/apps/search/by-appid-or-name",
+                            dataType: 'json',
+                            delay: 400,
+                            data: function (params) {
+                                return {
+                                    query: params.term || '',
+                                    page: params.page ? params.page - 1 : 0,
                                     size: 20
                                 };
                             },
@@ -115,7 +116,7 @@ directive_module.directive('apollonav',
                                 AppUtil.prefixPath() + '/config.html?#appid=' + selectedAppId + "&env=" + env
                                 + "&cluster=" + cluster + "&namespace=" + namespaceName + "&item=" + searchKey;
                         } else {
-                            $window.location.href =  AppUtil.prefixPath() + '/config.html?#appid=' + selectedAppId;
+                            $window.location.href = AppUtil.prefixPath() + '/config.html?#appid=' + selectedAppId;
                         }
                     }
                 };
@@ -234,7 +235,7 @@ directive_module.directive('apollorequiredfield', function ($compile, $window) {
 });
 
 /**  确认框 */
-directive_module.directive('apolloconfirmdialog', function ($compile, $window, $sce,$translate,AppUtil) {
+directive_module.directive('apolloconfirmdialog', function ($compile, $window, $sce, $translate, AppUtil) {
     return {
         restrict: 'E',
         templateUrl: AppUtil.prefixPath() + '/views/component/confirm-dialog.html',
@@ -267,13 +268,12 @@ directive_module.directive('apolloconfirmdialog', function ($compile, $window, $
             };
 
 
-
         }
     }
 });
 
 /** entrance */
-directive_module.directive('apolloentrance', function ($compile, $window,AppUtil) {
+directive_module.directive('apolloentrance', function ($compile, $window, AppUtil) {
     return {
         restrict: 'E',
         templateUrl: AppUtil.prefixPath() + '/views/component/entrance.html',
@@ -290,7 +290,7 @@ directive_module.directive('apolloentrance', function ($compile, $window,AppUtil
 });
 
 /** entrance */
-directive_module.directive('apollouserselector', function ($compile, $window,AppUtil) {
+directive_module.directive('apollouserselector', function ($compile, $window, AppUtil) {
     return {
         restrict: 'E',
         templateUrl: AppUtil.prefixPath() + '/views/component/user-selector.html',
@@ -342,7 +342,7 @@ directive_module.directive('apollouserselector', function ($compile, $window,App
     }
 });
 
-directive_module.directive('apollomultipleuserselector', function ($compile, $window,AppUtil) {
+directive_module.directive('apollomultipleuserselector', function ($compile, $window, AppUtil) {
     return {
         restrict: 'E',
         templateUrl: AppUtil.prefixPath() + '/views/component/multiple-user-selector.html',

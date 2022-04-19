@@ -26,55 +26,55 @@ import static com.google.common.base.MoreObjects.toStringHelper;
  * @author Jason Song(song_s@ctrip.com)
  */
 public class GrayReleaseRuleItemDTO {
-  public static final String ALL_IP = "*";
-  public static final String ALL_Label = "*";
+    public static final String ALL_IP = "*";
+    public static final String ALL_Label = "*";
 
-  private String clientAppId;
-  private Set<String> clientIpList;
-  private Set<String> clientLabelList;
+    private String clientAppId;
+    private Set<String> clientIpList;
+    private Set<String> clientLabelList;
 
-  public GrayReleaseRuleItemDTO(String clientAppId) {
-    this(clientAppId, Sets.newHashSet(), Sets.newHashSet());
-  }
+    public GrayReleaseRuleItemDTO(String clientAppId) {
+        this(clientAppId, Sets.newHashSet(), Sets.newHashSet());
+    }
 
-  public GrayReleaseRuleItemDTO(String clientAppId, Set<String> clientIpList, Set<String> clientLabelList) {
-    this.clientAppId = clientAppId;
-    this.clientIpList = clientIpList;
-    this.clientLabelList = clientLabelList;
-  }
+    public GrayReleaseRuleItemDTO(String clientAppId, Set<String> clientIpList, Set<String> clientLabelList) {
+        this.clientAppId = clientAppId;
+        this.clientIpList = clientIpList;
+        this.clientLabelList = clientLabelList;
+    }
 
-  public String getClientAppId() {
-    return clientAppId;
-  }
+    public String getClientAppId() {
+        return clientAppId;
+    }
 
-  public Set<String> getClientIpList() {
-    return clientIpList;
-  }
+    public Set<String> getClientIpList() {
+        return clientIpList;
+    }
 
-  public Set<String> getClientLabelList() {
-    return clientLabelList;
-  }
+    public Set<String> getClientLabelList() {
+        return clientLabelList;
+    }
 
-  public boolean matches(String clientAppId, String clientIp,String clientLabel) {
-    return (appIdMatches(clientAppId) && ipMatches(clientIp))||(appIdMatches(clientAppId) && labelMatches(clientLabel));
-  }
+    public boolean matches(String clientAppId, String clientIp, String clientLabel) {
+        return (appIdMatches(clientAppId) && ipMatches(clientIp)) || (appIdMatches(clientAppId) && labelMatches(clientLabel));
+    }
 
-  private boolean appIdMatches(String clientAppId) {
-    return this.clientAppId.equalsIgnoreCase(clientAppId);
-  }
+    private boolean appIdMatches(String clientAppId) {
+        return this.clientAppId.equalsIgnoreCase(clientAppId);
+    }
 
-  private boolean ipMatches(String clientIp) {
-    return this.clientIpList.contains(ALL_IP) || clientIpList.contains(clientIp);
-  }
+    private boolean ipMatches(String clientIp) {
+        return this.clientIpList.contains(ALL_IP) || clientIpList.contains(clientIp);
+    }
 
-  private boolean labelMatches(String clientLabel) {
-    return this.clientLabelList.contains(ALL_Label) || clientLabelList.contains(clientLabel);
-  }
+    private boolean labelMatches(String clientLabel) {
+        return this.clientLabelList.contains(ALL_Label) || clientLabelList.contains(clientLabel);
+    }
 
-  @Override
-  public String toString() {
-    return toStringHelper(this).add("clientAppId", clientAppId)
-        .add("clientIpList", clientIpList)
-        .add("clientLabelList", clientLabelList).toString();
-  }
+    @Override
+    public String toString() {
+        return toStringHelper(this).add("clientAppId", clientAppId)
+                .add("clientIpList", clientIpList)
+                .add("clientLabelList", clientLabelList).toString();
+    }
 }

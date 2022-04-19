@@ -32,42 +32,42 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class UserInfoControllerTest {
 
-  @InjectMocks
-  private UserInfoController userInfoController;
-  @Mock
-  private SpringSecurityUserService userService;
-  @Mock
-  private AuthUserPasswordChecker userPasswordChecker;
+    @InjectMocks
+    private UserInfoController userInfoController;
+    @Mock
+    private SpringSecurityUserService userService;
+    @Mock
+    private AuthUserPasswordChecker userPasswordChecker;
 
-  @Test
-  public void testCreateOrUpdateUser() {
-    UserPO user = new UserPO();
-    user.setUsername("username");
-    user.setPassword("password");
+    @Test
+    public void testCreateOrUpdateUser() {
+        UserPO user = new UserPO();
+        user.setUsername("username");
+        user.setPassword("password");
 
-    Mockito.when(userPasswordChecker.checkWeakPassword(Mockito.anyString()))
-        .thenReturn(new CheckResult(Boolean.TRUE, ""));
+        Mockito.when(userPasswordChecker.checkWeakPassword(Mockito.anyString()))
+                .thenReturn(new CheckResult(Boolean.TRUE, ""));
 
-    userInfoController.createOrUpdateUser(user);
-  }
-
-  @Test(expected = BadRequestException.class)
-  public void testCreateOrUpdateUserFailed() {
-    UserPO user = new UserPO();
-    user.setUsername("username");
-    user.setPassword("password");
-
-    String msg = "fake error message";
-
-    Mockito.when(userPasswordChecker.checkWeakPassword(Mockito.anyString()))
-        .thenReturn(new CheckResult(Boolean.FALSE, msg));
-
-    try {
-      userInfoController.createOrUpdateUser(user);
-    } catch (BadRequestException e) {
-      Assert.assertEquals(msg, e.getMessage());
-      throw e;
+        userInfoController.createOrUpdateUser(user);
     }
-  }
+
+    @Test(expected = BadRequestException.class)
+    public void testCreateOrUpdateUserFailed() {
+        UserPO user = new UserPO();
+        user.setUsername("username");
+        user.setPassword("password");
+
+        String msg = "fake error message";
+
+        Mockito.when(userPasswordChecker.checkWeakPassword(Mockito.anyString()))
+                .thenReturn(new CheckResult(Boolean.FALSE, msg));
+
+        try {
+            userInfoController.createOrUpdateUser(user);
+        } catch (BadRequestException e) {
+            Assert.assertEquals(msg, e.getMessage());
+            throw e;
+        }
+    }
 
 }

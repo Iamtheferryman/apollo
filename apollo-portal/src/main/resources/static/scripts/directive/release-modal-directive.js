@@ -75,23 +75,23 @@ function releaseModalDirective($translate, toastr, AppUtil, EventManager, Releas
                     scope.toReleaseNamespace.releaseTitle,
                     scope.releaseComment,
                     scope.isEmergencyPublish).then(
-                        function (result) {
-                            AppUtil.hideModal('#releaseModal');
-                            toastr.success($translate.instant('ReleaseModal.Published'));
+                    function (result) {
+                        AppUtil.hideModal('#releaseModal');
+                        toastr.success($translate.instant('ReleaseModal.Published'));
 
-                            scope.releaseBtnDisabled = false;
+                        scope.releaseBtnDisabled = false;
 
-                            EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
-                                {
-                                    namespace: scope.toReleaseNamespace
-                                })
+                        EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
+                            {
+                                namespace: scope.toReleaseNamespace
+                            })
 
-                        }, function (result) {
-                            scope.releaseBtnDisabled = false;
-                            toastr.error(AppUtil.errorMsg(result), $translate.instant('ReleaseModal.PublishFailed'));
+                    }, function (result) {
+                        scope.releaseBtnDisabled = false;
+                        toastr.error(AppUtil.errorMsg(result), $translate.instant('ReleaseModal.PublishFailed'));
 
-                        }
-                    );
+                    }
+                );
 
             }
 
@@ -104,41 +104,41 @@ function releaseModalDirective($translate, toastr, AppUtil, EventManager, Releas
                     scope.toReleaseNamespace.releaseTitle,
                     scope.releaseComment,
                     scope.isEmergencyPublish).then(
-                        function (result) {
-                            AppUtil.hideModal('#releaseModal');
-                            toastr.success($translate.instant('ReleaseModal.GrayscalePublished'));
+                    function (result) {
+                        AppUtil.hideModal('#releaseModal');
+                        toastr.success($translate.instant('ReleaseModal.GrayscalePublished'));
 
-                            scope.releaseBtnDisabled = false;
+                        scope.releaseBtnDisabled = false;
 
-                            //refresh item status
-                            for (let index = 0; index < scope.toReleaseNamespace.branchItems.length; index++) {
-                                const item = scope.toReleaseNamespace.branchItems[index];
-                                if (item.isDeleted) {
-                                    scope.toReleaseNamespace.branchItems.splice(index, 1);
-                                    index--;
-                                } else {
-                                    item.isModified = false;
-                                }
+                        //refresh item status
+                        for (let index = 0; index < scope.toReleaseNamespace.branchItems.length; index++) {
+                            const item = scope.toReleaseNamespace.branchItems[index];
+                            if (item.isDeleted) {
+                                scope.toReleaseNamespace.branchItems.splice(index, 1);
+                                index--;
+                            } else {
+                                item.isModified = false;
                             }
+                        }
 
-                            //reset namespace status
-                            scope.toReleaseNamespace.itemModifiedCnt = 0;
-                            scope.toReleaseNamespace.lockOwner = undefined;
+                        //reset namespace status
+                        scope.toReleaseNamespace.itemModifiedCnt = 0;
+                        scope.toReleaseNamespace.lockOwner = undefined;
 
-                            //check rules
-                            if (!scope.toReleaseNamespace.rules
-                                || !scope.toReleaseNamespace.rules.ruleItems
-                                || !scope.toReleaseNamespace.rules.ruleItems.length) {
+                        //check rules
+                        if (!scope.toReleaseNamespace.rules
+                            || !scope.toReleaseNamespace.rules.ruleItems
+                            || !scope.toReleaseNamespace.rules.ruleItems.length) {
 
-                                scope.toReleaseNamespace.viewType = 'rule';
-                                AppUtil.showModal('#grayReleaseWithoutRulesTips');
-                            }
+                            scope.toReleaseNamespace.viewType = 'rule';
+                            AppUtil.showModal('#grayReleaseWithoutRulesTips');
+                        }
 
-                        }, function (result) {
-                            scope.releaseBtnDisabled = false;
-                            toastr.error(AppUtil.errorMsg(result), $translate.instant('ReleaseModal.GrayscalePublishFailed'));
+                    }, function (result) {
+                        scope.releaseBtnDisabled = false;
+                        toastr.error(AppUtil.errorMsg(result), $translate.instant('ReleaseModal.GrayscalePublishFailed'));
 
-                        });
+                    });
             }
 
             function mergeAndPublish() {

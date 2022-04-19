@@ -92,10 +92,10 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         find_app_by_owner: function (owner, page, size) {
             var d = $q.defer();
             app_resource.find_app_by_owner({
-                                               owner: owner,
-                                               page: page,
-                                               size: size
-                                           }, function (result) {
+                owner: owner,
+                page: page,
+                size: size
+            }, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -105,8 +105,8 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         load_nav_tree: function (appId) {
             var d = $q.defer();
             app_resource.load_navtree({
-                                          appId: appId
-                                      }, function (result) {
+                appId: appId
+            }, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -125,8 +125,8 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         update: function (app) {
             var d = $q.defer();
             app_resource.update_app({
-                                        appId: app.appId
-                                    }, app, function (result) {
+                appId: app.appId
+            }, app, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -145,8 +145,8 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         load: function (appId) {
             var d = $q.defer();
             app_resource.load_app({
-                                      appId: appId
-                                  }, function (result) {
+                appId: appId
+            }, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -156,8 +156,8 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         find_miss_envs: function (appId) {
             var d = $q.defer();
             app_resource.find_miss_envs({
-                                            appId: appId
-                                        }, function (result) {
+                appId: appId
+            }, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -167,10 +167,10 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         create_missing_namespaces: function (appId, env, clusterName) {
             var d = $q.defer();
             app_resource.create_missing_namespaces({
-                                            appId: appId,
-                                            env: env,
-                                            clusterName: clusterName
-                                        }, null, function (result) {
+                appId: appId,
+                env: env,
+                clusterName: clusterName
+            }, null, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);
@@ -180,10 +180,10 @@ appService.service('AppService', ['$resource', '$q', 'AppUtil', function ($resou
         find_missing_namespaces: function (appId, env, clusterName) {
             var d = $q.defer();
             app_resource.find_missing_namespaces({
-                                            appId: appId,
-                                            env: env,
-                                            clusterName: clusterName
-                                        }, function (result) {
+                appId: appId,
+                env: env,
+                clusterName: clusterName
+            }, function (result) {
                 d.resolve(result);
             }, function (result) {
                 d.reject(result);

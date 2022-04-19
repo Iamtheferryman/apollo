@@ -17,4 +17,5 @@
 
 Use ApolloConfigDB;
 
-ALTER TABLE Item ADD INDEX IX_key (`Key`);
+ALTER TABLE Item
+    ADD INDEX IX_key (`Key`);

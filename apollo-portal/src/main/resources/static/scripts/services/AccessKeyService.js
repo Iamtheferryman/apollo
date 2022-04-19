@@ -57,7 +57,7 @@ appService.service('AccessKeyService', ['$resource', '$q', 'AppUtil', function (
             access_key_resource.create_access_key({
                     appId: appId,
                     env: env
-                }, { dataChangeCreatedBy: user },
+                }, {dataChangeCreatedBy: user},
                 function (result) {
                     d.resolve(result);
                 }, function (result) {

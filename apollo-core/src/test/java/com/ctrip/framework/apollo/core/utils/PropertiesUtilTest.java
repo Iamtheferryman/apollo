@@ -18,43 +18,42 @@ package com.ctrip.framework.apollo.core.utils;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-
 import java.io.IOException;
 import java.util.Properties;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 
 public class PropertiesUtilTest {
 
 
-  @Test
-  public void testToString() throws IOException {
+    @Test
+    public void testToString() throws IOException {
 
-    assertEquals("", PropertiesUtil.toString(new Properties()));
-    assertNotEquals(" ", PropertiesUtil.toString(new Properties()));
+        assertEquals("", PropertiesUtil.toString(new Properties()));
+        assertNotEquals(" ", PropertiesUtil.toString(new Properties()));
 
-    Properties properties = new Properties();
-    properties.put("a", "aaa");
-    assertEquals("a=aaa" + System.lineSeparator(), PropertiesUtil.toString(properties));
-  }
+        Properties properties = new Properties();
+        properties.put("a", "aaa");
+        assertEquals("a=aaa" + System.lineSeparator(), PropertiesUtil.toString(properties));
+    }
 
-  @Test
-  public void testFilterPropertiesComment() {
+    @Test
+    public void testFilterPropertiesComment() {
 
-    StringBuffer sb1 = new StringBuffer(System.lineSeparator());
-    PropertiesUtil.filterPropertiesComment(sb1);
-    boolean equals = "".equals(sb1.toString());
-    assertEquals(false, equals);
+        StringBuffer sb1 = new StringBuffer(System.lineSeparator());
+        PropertiesUtil.filterPropertiesComment(sb1);
+        boolean equals = "".equals(sb1.toString());
+        assertEquals(false, equals);
 
-    StringBuffer sb2 = new StringBuffer("#aaa" + System.lineSeparator());
-    PropertiesUtil.filterPropertiesComment(sb2);
-    assertEquals("", sb2.toString());
+        StringBuffer sb2 = new StringBuffer("#aaa" + System.lineSeparator());
+        PropertiesUtil.filterPropertiesComment(sb2);
+        assertEquals("", sb2.toString());
 
-    StringBuffer sb3 = new StringBuffer("#aaaaa" + System.lineSeparator() + "bbb");
-    PropertiesUtil.filterPropertiesComment(sb3);
-    assertEquals("bbb", sb3.toString());
-    assertNotEquals("#aaaaa" + System.lineSeparator() + "bbb", sb3.toString());
-  }
+        StringBuffer sb3 = new StringBuffer("#aaaaa" + System.lineSeparator() + "bbb");
+        PropertiesUtil.filterPropertiesComment(sb3);
+        assertEquals("bbb", sb3.toString());
+        assertNotEquals("#aaaaa" + System.lineSeparator() + "bbb", sb3.toString());
+    }
 }

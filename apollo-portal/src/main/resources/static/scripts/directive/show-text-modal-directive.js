@@ -17,7 +17,7 @@
 directive_module.directive('showtextmodal', showTextModalDirective)
     .filter('jsonBigIntFilter', function () {
         return function (text) {
-            if (typeof(text) === "undefined" || typeof JSON.parse(text) !== "object"
+            if (typeof (text) === "undefined" || typeof JSON.parse(text) !== "object"
                 || !text) {
                 return;
             }
@@ -36,7 +36,7 @@ directive_module.directive('showtextmodal', showTextModalDirective)
 
             Object.keys(splitArray).forEach(function (key) {
                 resultStr = resultStr.concat(splitArray[key]);
-                if (typeof(matchResult[index]) !== "undefined") {
+                if (typeof (matchResult[index]) !== "undefined") {
                     resultStr = resultStr.concat(matchResult[index++])
                 }
             })

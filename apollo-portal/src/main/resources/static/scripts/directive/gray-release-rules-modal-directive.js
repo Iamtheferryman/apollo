@@ -114,7 +114,7 @@ function rulesModalDirective($translate, toastr, AppUtil, EventManager, Instance
                 if (newIps && newIps.length > 0) {
                     newIps.forEach(function (IP) {
                         if (!AppUtil.checkIPV4(IP)) {
-                            toastr.error($translate.instant('RulesModal.ChooseInstances', { ip: IP }));
+                            toastr.error($translate.instant('RulesModal.ChooseInstances', {ip: IP}));
                         } else if (oldIPs.indexOf(IP) < 0) {
                             oldIPs.push(IP);
                         }
@@ -128,6 +128,7 @@ function rulesModalDirective($translate, toastr, AppUtil, EventManager, Instance
                 });
 
             }
+
             function addRuleItemLabel(branch, newLabels) {
                 var oldLabels = branch.editingRuleItem.draftLabelList;
                 if (newLabels && newLabels.length > 0) {
@@ -144,6 +145,7 @@ function rulesModalDirective($translate, toastr, AppUtil, EventManager, Instance
                     }
                 });
             }
+
             function removeRule(ruleItem, IP) {
 
                 ruleItem.draftIpList.forEach(function (existedRule, index) {
@@ -177,7 +179,7 @@ function rulesModalDirective($translate, toastr, AppUtil, EventManager, Instance
                     var errorRuleItem = false;
                     branch.rules.ruleItems.forEach(function (ruleItem) {
                         if (ruleItem.clientAppId == branch.editingRuleItem.clientAppId) {
-                            toastr.error($translate.instant('RulesModal.AppIdExistsRule', { appId: branch.editingRuleItem.clientAppId }));
+                            toastr.error($translate.instant('RulesModal.AppIdExistsRule', {appId: branch.editingRuleItem.clientAppId}));
                             errorRuleItem = true;
                         }
                     });
@@ -188,7 +190,7 @@ function rulesModalDirective($translate, toastr, AppUtil, EventManager, Instance
                 }
 
                 if (!branch.editingRuleItem.ApplyToAllInstances) {
-                    if ((branch.editingRuleItem.draftIpList.length == 0)&&(branch.editingRuleItem.draftLabelList.length == 0)) {
+                    if ((branch.editingRuleItem.draftIpList.length == 0) && (branch.editingRuleItem.draftLabelList.length == 0)) {
                         toastr.error($translate.instant('RulesModal.RuleListCanNotBeNull'));
                         scope.completeEditBtnDisable = false;
                         return;

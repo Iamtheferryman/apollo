@@ -17,7 +17,7 @@
 directive_module.directive('deletenamespacemodal', deleteNamespaceModalDirective);
 
 function deleteNamespaceModalDirective($window, $q, $translate, toastr, AppUtil, EventManager,
-    PermissionService, UserService, NamespaceService) {
+                                       PermissionService, UserService, NamespaceService) {
     return {
         restrict: 'E',
         templateUrl: AppUtil.prefixPath() + '/views/component/delete-namespace-modal.html',
@@ -27,7 +27,6 @@ function deleteNamespaceModalDirective($window, $q, $translate, toastr, AppUtil,
             env: '='
         },
         link: function (scope) {
-
 
 
             scope.doDeleteNamespace = doDeleteNamespace;

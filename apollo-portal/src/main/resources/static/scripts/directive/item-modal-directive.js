@@ -60,7 +60,7 @@ function itemModalDirective($translate, toastr, $sce, AppUtil, EventManager, Con
                     var hasRepeatKey = false;
                     scope.toOperationNamespace.items.forEach(function (item) {
                         if (!item.isDeleted && scope.item.key == item.item.key) {
-                            toastr.error($translate.instant('ItemModal.KeyExists', { key: scope.item.key }));
+                            toastr.error($translate.instant('ItemModal.KeyExists', {key: scope.item.key}));
                             hasRepeatKey = true;
                         }
                     });
@@ -76,19 +76,19 @@ function itemModalDirective($translate, toastr, $sce, AppUtil, EventManager, Con
                             scope.toOperationNamespace.baseInfo.clusterName,
                             scope.toOperationNamespace.baseInfo.namespaceName,
                             scope.item).then(
-                                function (result) {
-                                    toastr.success($translate.instant('ItemModal.AddedTips'));
-                                    scope.item.addItemBtnDisabled = false;
-                                    AppUtil.hideModal('#itemModal');
-                                    EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
-                                        {
-                                            namespace: scope.toOperationNamespace
-                                        });
+                            function (result) {
+                                toastr.success($translate.instant('ItemModal.AddedTips'));
+                                scope.item.addItemBtnDisabled = false;
+                                AppUtil.hideModal('#itemModal');
+                                EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
+                                    {
+                                        namespace: scope.toOperationNamespace
+                                    });
 
-                                }, function (result) {
-                                    toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.AddFailed'));
-                                    scope.item.addItemBtnDisabled = false;
-                                });
+                            }, function (result) {
+                                toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.AddFailed'));
+                                scope.item.addItemBtnDisabled = false;
+                            });
                     } else {
                         if (selectedClusters.length == 0) {
                             toastr.error($translate.instant('ItemModal.PleaseChooseCluster'));
@@ -102,22 +102,22 @@ function itemModalDirective($translate, toastr, $sce, AppUtil, EventManager, Con
                                 cluster.name,
                                 scope.toOperationNamespace.baseInfo.namespaceName,
                                 scope.item).then(
-                                    function (result) {
-                                        scope.item.addItemBtnDisabled = false;
-                                        AppUtil.hideModal('#itemModal');
-                                        toastr.success(cluster.env + " , " + scope.item.key, $translate.instant('ItemModal.AddedTips'));
-                                        if (cluster.env == scope.env &&
-                                            cluster.name == scope.cluster) {
+                                function (result) {
+                                    scope.item.addItemBtnDisabled = false;
+                                    AppUtil.hideModal('#itemModal');
+                                    toastr.success(cluster.env + " , " + scope.item.key, $translate.instant('ItemModal.AddedTips'));
+                                    if (cluster.env == scope.env &&
+                                        cluster.name == scope.cluster) {
 
-                                            EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
-                                                {
-                                                    namespace: scope.toOperationNamespace
-                                                });
-                                        }
-                                    }, function (result) {
-                                        toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.AddFailed'));
-                                        scope.item.addItemBtnDisabled = false;
-                                    });
+                                        EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
+                                            {
+                                                namespace: scope.toOperationNamespace
+                                            });
+                                    }
+                                }, function (result) {
+                                    toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.AddFailed'));
+                                    scope.item.addItemBtnDisabled = false;
+                                });
                         });
                     }
 
@@ -132,18 +132,18 @@ function itemModalDirective($translate, toastr, $sce, AppUtil, EventManager, Con
                         scope.toOperationNamespace.baseInfo.clusterName,
                         scope.toOperationNamespace.baseInfo.namespaceName,
                         scope.item).then(
-                            function (result) {
-                                EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
-                                    {
-                                        namespace: scope.toOperationNamespace
-                                    });
+                        function (result) {
+                            EventManager.emit(EventManager.EventType.REFRESH_NAMESPACE,
+                                {
+                                    namespace: scope.toOperationNamespace
+                                });
 
-                                AppUtil.hideModal('#itemModal');
+                            AppUtil.hideModal('#itemModal');
 
-                                toastr.success($translate.instant('ItemModal.ModifiedTips'));
-                            }, function (result) {
-                                toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.ModifyFailed'));
-                            });
+                            toastr.success($translate.instant('ItemModal.ModifiedTips'));
+                        }, function (result) {
+                            toastr.error(AppUtil.errorMsg(result), $translate.instant('ItemModal.ModifyFailed'));
+                        });
                 }
 
             }

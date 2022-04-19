@@ -136,7 +136,7 @@ function IndexController($scope, $window, $translate, toastr, AppUtil, AppServic
                 $scope.allPublicNamespaces = result;
                 morePublicNamespace();
                 var selectResult = [];
-                angular.forEach(result,function (app) {
+                angular.forEach(result, function (app) {
                     selectResult.push({
                         id: app.appId,
                         text: app.appId + ' / ' + app.name

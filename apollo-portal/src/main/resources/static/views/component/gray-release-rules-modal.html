@@ -1,4 +1,4 @@
-<form id="rulesModal" class="modal fade" role="dialog" aria-hidden="true">
+<form aria-hidden="true" class="modal fade" id="rulesModal" role="dialog">
     <!--
       ~ Copyright 2021 Apollo Authors
       ~
@@ -18,8 +18,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header panel-primary">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                        aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">
                     {{'Component.GrayscalePublishRule.Title' | translate }}
@@ -33,25 +33,26 @@
                         {{'Component.GrayscalePublishRule.AppId' | translate }}
                     </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" ng-model="branch.editingRuleItem.clientAppId"
-                               ng-model-options='{ debounce: 300 }' ng-change='initSelectIps()'>
+                        <input class="form-control" ng-change='initSelectIps()' ng-model="branch.editingRuleItem.clientAppId"
+                               ng-model-options='{ debounce: 300 }' type="text">
                     </div>
                 </div>
                 <div class="form-group"
                      ng-show="branch.parentNamespace.isPublic && !branch.parentNamespace.isLinkedNamespace">
                     <label
-                        class="control-label col-md-3 text-right">{{'Component.GrayscalePublishRule.AcceptRule' | translate }}</label>
+                            class="control-label col-md-3 text-right">{{'Component.GrayscalePublishRule.AcceptRule' | translate
+                        }}</label>
                     <div class="col-md-9">
                         <label class="form-control-static radio-inline">
-                            <input type="radio" name="ApplyToAllInstances" value="false"
-                                   ng-checked="!branch.editingRuleItem.ApplyToAllInstances"
-                                   ng-click="changeApplyToAllInstancesToFalse(branch)">
+                            <input name="ApplyToAllInstances" ng-checked="!branch.editingRuleItem.ApplyToAllInstances" ng-click="changeApplyToAllInstancesToFalse(branch)"
+                                   type="radio"
+                                   value="false">
                             {{'Component.GrayscalePublishRule.AcceptPartInstance' | translate }}
                         </label>
                         <label class="form-control-static radio-inline">
-                            <input type="radio" name="ApplyToAllInstances" value="true"
-                                   ng-checked="branch.editingRuleItem.ApplyToAllInstances"
-                                   ng-click="changeApplyToAllInstancesToTrue(branch)">
+                            <input name="ApplyToAllInstances" ng-checked="branch.editingRuleItem.ApplyToAllInstances" ng-click="changeApplyToAllInstancesToTrue(branch)"
+                                   type="radio"
+                                   value="true">
                             {{'Component.GrayscalePublishRule.AcceptAllInstance' | translate }}
                         </label>
                     </div>
@@ -66,23 +67,24 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <select class="rules-ip-selector" multiple="multiple">
-                                    <option ng-repeat="instance in selectIps" ng-bind="instance.ip">
+                                    <option ng-bind="instance.ip" ng-repeat="instance in selectIps">
                                     </option>
                                 </select>
                                 <div
-                                    ng-show="branch.parentNamespace.isPublic && !branch.parentNamespace.isLinkedNamespace">
+                                        ng-show="branch.parentNamespace.isPublic && !branch.parentNamespace.isLinkedNamespace">
                                     <small>{{'Component.GrayscalePublishRule.AppIdFilterTips' | translate }}</small>
                                 </div>
                                 <div style="margin-top: 5px">
                                     <small>{{'Component.GrayscalePublishRule.IpTips' | translate }}<a
-                                        ng-click="manual =! manual">{{'Component.GrayscalePublishRule.EnterIp' | translate }}</a></small>
+                                            ng-click="manual =! manual">{{'Component.GrayscalePublishRule.EnterIp' | translate
+                                        }}</a></small>
                                 </div>
                             </div>
                         </div>
                         <div class="form-inline" ng-show="manual">
                             <div class="form-group">
-                                <textarea class="form-control" ng-model="toAddIPs" rows="3"
-                                          placeholder="{{'Component.GrayscalePublishRule.EnterIpTips' | translate }}"></textarea>
+                                <textarea class="form-control" ng-model="toAddIPs" placeholder="{{'Component.GrayscalePublishRule.EnterIpTips' | translate }}"
+                                          rows="3"></textarea>
                             </div>
                             <button class="btn-default btn add-rule" ng-click="batchAddIPs(branch, toAddIPs)">
                                 {{'Component.GrayscalePublishRule.Add' | translate }}
@@ -94,9 +96,9 @@
                     <div class="col-md-offset-1 col-md-10 item-container">
                         <section class="btn-group item-info"
                                  ng-repeat="ip in branch.editingRuleItem.draftIpList">
-                            <button type="button" class="btn btn-default" ng-bind="ip"></button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    ng-click="removeRule(branch.editingRuleItem, ip)">
+                            <button class="btn btn-default" ng-bind="ip" type="button"></button>
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="removeRule(branch.editingRuleItem, ip)"
+                                    type="button">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </section>
@@ -109,10 +111,10 @@
                         {{'Component.GrayscalePublishRule.Label' | translate }}
                     </label>
                     <div class="col-md-9">
-                        <div class="form-inline" >
+                        <div class="form-inline">
                             <div class="form-group">
-                                <textarea class="form-control" ng-model="toAddLabels" rows="1"
-                                          placeholder="{{'Component.GrayscalePublishRule.EnterLabelTips' | translate }}"></textarea>
+                                <textarea class="form-control" ng-model="toAddLabels" placeholder="{{'Component.GrayscalePublishRule.EnterLabelTips' | translate }}"
+                                          rows="1"></textarea>
                             </div>
                             <button class="btn-default btn add-rule" ng-click="batchAddLabels(branch, toAddLabels)">
                                 {{'Component.GrayscalePublishRule.Add' | translate }}
@@ -125,9 +127,9 @@
                     <div class="col-md-offset-1 col-md-10 item-container">
                         <section class="btn-group item-info"
                                  ng-repeat="label in branch.editingRuleItem.draftLabelList">
-                            <button type="button" class="btn btn-default" ng-bind="label"></button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    ng-click="removeRuleLabel(branch.editingRuleItem, label)">
+                            <button class="btn btn-default" ng-bind="label" type="button"></button>
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="removeRuleLabel(branch.editingRuleItem, label)"
+                                    type="button">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </section>
@@ -137,9 +139,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default"
-                        ng-click="cancelEditItem(branch)">{{'Common.Cancel' | translate }}</button>
-                <button class="btn btn-primary" ng-disabled="completeEditBtnDisable"
-                        ng-click="completeEditItem(branch)">{{'Common.Ok' | translate }}
+                        ng-click="cancelEditItem(branch)">{{'Common.Cancel' | translate }}
+                </button>
+                <button class="btn btn-primary" ng-click="completeEditItem(branch)"
+                        ng-disabled="completeEditBtnDisable">{{'Common.Ok' | translate }}
                 </button>
             </div>
         </div>

@@ -27,61 +27,62 @@ import com.ctrip.framework.apollo.portal.component.PortalSettings;
 import com.ctrip.framework.apollo.portal.environment.Env;
 import com.ctrip.framework.apollo.portal.service.AppService;
 import com.ctrip.framework.apollo.portal.service.ClusterService;
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * @author wxq
  */
 @Service
 public class ServerAppOpenApiService implements AppOpenApiService {
-  private final PortalSettings portalSettings;
-  private final ClusterService clusterService;
-  private final AppService appService;
+    private final PortalSettings portalSettings;
+    private final ClusterService clusterService;
+    private final AppService appService;
 
-  public ServerAppOpenApiService(
-      PortalSettings portalSettings,
-      ClusterService clusterService,
-      AppService appService) {
-    this.portalSettings = portalSettings;
-    this.clusterService = clusterService;
-    this.appService = appService;
-  }
-
-  @Override
-  public List<OpenEnvClusterDTO> getEnvClusterInfo(String appId) {
-    List<OpenEnvClusterDTO> envClusters = new LinkedList<>();
-
-    List<Env> envs = portalSettings.getActiveEnvs();
-    for (Env env : envs) {
-      OpenEnvClusterDTO envCluster = new OpenEnvClusterDTO();
-
-      envCluster.setEnv(env.getName());
-      List<ClusterDTO> clusterDTOs = clusterService.findClusters(env, appId);
-      envCluster.setClusters(BeanUtils.toPropertySet("name", clusterDTOs));
-
-      envClusters.add(envCluster);
+    public ServerAppOpenApiService(
+            PortalSettings portalSettings,
+            ClusterService clusterService,
+            AppService appService) {
+        this.portalSettings = portalSettings;
+        this.clusterService = clusterService;
+        this.appService = appService;
     }
 
-    return envClusters;
-  }
+    @Override
+    public List<OpenEnvClusterDTO> getEnvClusterInfo(String appId) {
+        List<OpenEnvClusterDTO> envClusters = new LinkedList<>();
 
-  @Override
-  public List<OpenAppDTO> getAllApps() {
-    final List<App> apps = this.appService.findAll();
-    return OpenApiBeanUtils.transformFromApps(apps);
-  }
+        List<Env> envs = portalSettings.getActiveEnvs();
+        for (Env env : envs) {
+            OpenEnvClusterDTO envCluster = new OpenEnvClusterDTO();
 
-  @Override
-  public List<OpenAppDTO> getAppsInfo(List<String> appIds) {
-    final List<App> apps = this.appService.findByAppIds(new HashSet<>(appIds));
-    return OpenApiBeanUtils.transformFromApps(apps);
-  }
+            envCluster.setEnv(env.getName());
+            List<ClusterDTO> clusterDTOs = clusterService.findClusters(env, appId);
+            envCluster.setClusters(BeanUtils.toPropertySet("name", clusterDTOs));
 
-  @Override
-  public List<OpenAppDTO> getAuthorizedApps() {
-    throw new UnsupportedOperationException();
-  }
+            envClusters.add(envCluster);
+        }
+
+        return envClusters;
+    }
+
+    @Override
+    public List<OpenAppDTO> getAllApps() {
+        final List<App> apps = this.appService.findAll();
+        return OpenApiBeanUtils.transformFromApps(apps);
+    }
+
+    @Override
+    public List<OpenAppDTO> getAppsInfo(List<String> appIds) {
+        final List<App> apps = this.appService.findByAppIds(new HashSet<>(appIds));
+        return OpenApiBeanUtils.transformFromApps(apps);
+    }
+
+    @Override
+    public List<OpenAppDTO> getAuthorizedApps() {
+        throw new UnsupportedOperationException();
+    }
 }

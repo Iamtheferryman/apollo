@@ -17,60 +17,60 @@
 package com.ctrip.framework.apollo.openapi.v1.controller;
 
 import com.ctrip.framework.apollo.openapi.api.AppOpenApiService;
-import com.ctrip.framework.apollo.openapi.service.ConsumerService;
-import com.ctrip.framework.apollo.openapi.util.ConsumerAuthUtil;
 import com.ctrip.framework.apollo.openapi.dto.OpenAppDTO;
 import com.ctrip.framework.apollo.openapi.dto.OpenEnvClusterDTO;
-import java.util.Arrays;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
+import com.ctrip.framework.apollo.openapi.service.ConsumerService;
+import com.ctrip.framework.apollo.openapi.util.ConsumerAuthUtil;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @RestController("openapiAppController")
 @RequestMapping("/openapi/v1")
 public class AppController {
 
-  private final ConsumerAuthUtil consumerAuthUtil;
-  private final ConsumerService consumerService;
-  private final AppOpenApiService appOpenApiService;
+    private final ConsumerAuthUtil consumerAuthUtil;
+    private final ConsumerService consumerService;
+    private final AppOpenApiService appOpenApiService;
 
-  public AppController(
-      final ConsumerAuthUtil consumerAuthUtil,
-      final ConsumerService consumerService,
-      AppOpenApiService appOpenApiService) {
-    this.consumerAuthUtil = consumerAuthUtil;
-    this.consumerService = consumerService;
-    this.appOpenApiService = appOpenApiService;
-  }
-
-  @GetMapping(value = "/apps/{appId}/envclusters")
-  public List<OpenEnvClusterDTO> getEnvClusterInfo(@PathVariable String appId){
-    return this.appOpenApiService.getEnvClusterInfo(appId);
-  }
-
-  @GetMapping("/apps")
-  public List<OpenAppDTO> findApps(@RequestParam(value = "appIds", required = false) String appIds) {
-    if (StringUtils.hasText(appIds)) {
-      return this.appOpenApiService.getAppsInfo(Arrays.asList(appIds.split(",")));
-    } else {
-      return this.appOpenApiService.getAllApps();
+    public AppController(
+            final ConsumerAuthUtil consumerAuthUtil,
+            final ConsumerService consumerService,
+            AppOpenApiService appOpenApiService) {
+        this.consumerAuthUtil = consumerAuthUtil;
+        this.consumerService = consumerService;
+        this.appOpenApiService = appOpenApiService;
     }
-  }
 
-  /**
-   * @return which apps can be operated by open api
-   */
-  @GetMapping("/apps/authorized")
-  public List<OpenAppDTO> findAppsAuthorized(HttpServletRequest request) {
-    long consumerId = this.consumerAuthUtil.retrieveConsumerId(request);
+    @GetMapping(value = "/apps/{appId}/envclusters")
+    public List<OpenEnvClusterDTO> getEnvClusterInfo(@PathVariable String appId) {
+        return this.appOpenApiService.getEnvClusterInfo(appId);
+    }
 
-    Set<String> appIds = this.consumerService.findAppIdsAuthorizedByConsumerId(consumerId);
+    @GetMapping("/apps")
+    public List<OpenAppDTO> findApps(@RequestParam(value = "appIds", required = false) String appIds) {
+        if (StringUtils.hasText(appIds)) {
+            return this.appOpenApiService.getAppsInfo(Arrays.asList(appIds.split(",")));
+        } else {
+            return this.appOpenApiService.getAllApps();
+        }
+    }
 
-    return this.appOpenApiService.getAppsInfo(new ArrayList<>(appIds));
-  }
+    /**
+     * @return which apps can be operated by open api
+     */
+    @GetMapping("/apps/authorized")
+    public List<OpenAppDTO> findAppsAuthorized(HttpServletRequest request) {
+        long consumerId = this.consumerAuthUtil.retrieveConsumerId(request);
+
+        Set<String> appIds = this.consumerService.findAppIdsAuthorizedByConsumerId(consumerId);
+
+        return this.appOpenApiService.getAppsInfo(new ArrayList<>(appIds));
+    }
 
 }

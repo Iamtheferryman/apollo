@@ -18,7 +18,7 @@ namespace_module.controller("LinkNamespaceController",
     ['$scope', '$location', '$window', '$translate', 'toastr', 'AppService', 'AppUtil', 'NamespaceService',
         'PermissionService', 'CommonService',
         function ($scope, $location, $window, $translate, toastr, AppService, AppUtil, NamespaceService,
-            PermissionService, CommonService) {
+                  PermissionService, CommonService) {
 
             var params = AppUtil.parseParams($location.$$url);
             $scope.appId = params.appid;
@@ -86,7 +86,7 @@ namespace_module.controller("LinkNamespaceController",
             };
 
             function shouldAppendNamespacePrefix() {
-                return  $scope.appendNamespacePrefix;
+                return $scope.appendNamespacePrefix;
             }
 
             var selectedClusters = [];
@@ -130,7 +130,7 @@ namespace_module.controller("LinkNamespaceController",
                             setInterval(function () {
                                 $scope.submitBtnDisabled = false;
                                 $window.location.href =
-                                AppUtil.prefixPath() + '/namespace/role.html?#appid=' + $scope.appId
+                                    AppUtil.prefixPath() + '/namespace/role.html?#appid=' + $scope.appId
                                     + "&namespaceName=" + $scope.namespaceName;
                             }, 1000);
                         }, function (result) {
@@ -158,7 +158,7 @@ namespace_module.controller("LinkNamespaceController",
                             setTimeout(function () {
                                 $scope.submitBtnDisabled = false;
                                 $window.location.href =
-                                AppUtil.prefixPath() + "/namespace/role.html?#/appid=" + $scope.appId
+                                    AppUtil.prefixPath() + "/namespace/role.html?#/appid=" + $scope.appId
                                     + "&namespaceName=" + result.name;
                             }, 1000);
                         }, function (result) {

@@ -11,7 +11,7 @@
  Licensed under Apache - https://raw.githubusercontent.com/CreoArt/jquery.textareafullscreen/master/LICENSE
 
 */
-(function($) {
+(function ($) {
     "use strict";
 
     var isFullscreen = false,
@@ -30,7 +30,7 @@
         };
     var methods = {
 
-        init: function(opts) {
+        init: function (opts) {
 
             settings = settings || {};
             $.extend(true, settings, settings);
@@ -53,44 +53,44 @@
             $el.css({
                 'width': '100%',
                 'height': '100%',
-				'resize': 'none'
+                'resize': 'none'
             });
 
             // ESC = closes the fullscreen mode
-            $(window).on("keyup.txeditor", function(e) {
+            $(window).on("keyup.txeditor", function (e) {
                 if (e.keyCode == 27) {
                     isFullscreen ? methods.minimize() : '';
                 }
             });
 
             // fullscreen icon click event
-            $icon.on('click.txeditor.icon', function(e) {
+            $icon.on('click.txeditor.icon', function (e) {
                 e.preventDefault();
                 methods[isFullscreen ? "minimize" : "expand"]();
             });
             return this;
         },
 
-        showOverlay: function() {
+        showOverlay: function () {
             $('<div class="tx-editor-overlay" />').appendTo('body')
                 .fadeTo(0, 1)
-                .click(function() {
+                .click(function () {
                     methods.minimize();
                 });
             return this;
         },
 
-        removeOverlay: function() {
+        removeOverlay: function () {
             var $overlay = $('.tx-editor-overlay');
             if ($overlay.length) {
-                $overlay.fadeTo(0, 0, function() {
+                $overlay.fadeTo(0, 0, function () {
                     $(this).remove();
                 });
             }
             return this;
         },
 
-        expand: function() {
+        expand: function () {
             settings.maxWidth ? $editor.css('max-width', settings.maxWidth) :
                 '';
             settings.maxHeight ? $editor.css('max-height', settings.maxHeight) :
@@ -99,7 +99,7 @@
                 methods.showOverlay();
             }
 
-            $(window).on('resize.txeditor', function() {
+            $(window).on('resize.txeditor', function () {
                 maxRelocate($editor);
             });
 
@@ -109,7 +109,7 @@
             return this;
         },
 
-        minimize: function() {
+        minimize: function () {
 
             $(window).off('resize.txeditor', relocate($editor))
             $editor.removeClass('expanded')
@@ -125,7 +125,7 @@
             return this;
         },
 
-        destroy: function() {
+        destroy: function () {
 
             methods.removeOverlay();
             $wrapper.insertBefore($el);
@@ -140,21 +140,22 @@
 
     var transitions = function () {
 
-            if (isFullscreen) {
-				$el.focus();
-				isFullscreen = false;
-				relocate($editor);
-            } else {
-				$el.focus();
-				$editor.css('opacity', 1);
-				isFullscreen = true;
-				maxRelocate($editor);
-            }
+        if (isFullscreen) {
+            $el.focus();
+            isFullscreen = false;
+            relocate($editor);
+        } else {
+            $el.focus();
+            $editor.css('opacity', 1);
+            isFullscreen = true;
+            maxRelocate($editor);
+        }
 
-            return;
+        return;
     };
 
     var inited = false;
+
     function maxRelocate(el) {
         if (!inited) {
             sourceWidth = el.width();
@@ -173,17 +174,17 @@
 
     function relocate(el) {
 
-            var yPos = 0 | ((($(window).height() - el.height()) / 2));
-            var xPos = 0 | (($(window).width() - el.width()) / 2);
-            el.css({
-                'top': yPos,
-                'left': xPos,
-                'width': sourceWidth,
-                'height': sourceHeight
-            });
-        }
+        var yPos = 0 | ((($(window).height() - el.height()) / 2));
+        var xPos = 0 | (($(window).width() - el.width()) / 2);
+        el.css({
+            'top': yPos,
+            'left': xPos,
+            'width': sourceWidth,
+            'height': sourceHeight
+        });
+    }
 
-    $.fn.textareafullscreen = function(method) {
+    $.fn.textareafullscreen = function (method) {
         $.extend(methods, transitions);
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(

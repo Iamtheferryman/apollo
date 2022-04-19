@@ -1,4 +1,4 @@
-<div class="modal fade" id="publishDenyModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="publishDenyModal" role="dialog" tabindex="-1">
     <!--
       ~ Copyright 2021 Apollo Authors
       ~
@@ -18,7 +18,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header panel-primary">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">{{'Component.PublishDeny.Title' | translate }}</h4>
             </div>
@@ -29,11 +29,11 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"
-                    ng-if="toReleaseNamespace.isEmergencyPublishAllowed" ng-click="emergencyPublish()">
+                <button class="btn btn-danger" data-dismiss="modal" ng-click="emergencyPublish()"
+                        ng-if="toReleaseNamespace.isEmergencyPublishAllowed" type="button">
                     {{'Component.PublishDeny.EmergencyPublish' | translate }}
                 </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                <button class="btn btn-primary" data-dismiss="modal" type="button">
                     {{'Component.PublishDeny.Close' | translate }}
                 </button>
             </div>

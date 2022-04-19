@@ -440,7 +440,7 @@ table th {
 }
 
 .namespace-panel .namespace-attribute-public {
-    margin-right:5px;
+    margin-right: 5px;
 }
 
 .namespace-panel .second-panel-heading .nav-tabs {
@@ -553,19 +553,19 @@ table th {
 
 /*搜索框*/
 ::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 8px;
+    /*滚动条整体样式*/
+    width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 10px;
-  background-color: rgba(178, 178, 178, 0.8);
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: rgba(178, 178, 178, 0.8);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(178, 178, 178, 1);
+    background-color: rgba(178, 178, 178, 1);
 }
 
 .app-list {
@@ -849,6 +849,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .app-list-choose:hover {
     background-color: #F2F6FC;
 }
@@ -863,6 +864,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .favorite-list-choose {
     height: 60px;
     display: flex;
@@ -872,6 +874,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .favorite-list-choose:hover {
     background-color: #F2F6FC;
 }
@@ -886,6 +889,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .public-namespace-list-choose {
     height: 60px;
     display: flex;
@@ -895,6 +899,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .public-namespace-list-choose:hover {
     background-color: #F2F6FC
 }
@@ -909,6 +914,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .visited-list-choose {
     height: 60px;
     display: flex;
@@ -918,6 +924,7 @@ table th {
     border-right: 1px solid #DCDFE6;
     cursor: pointer;
 }
+
 .left-bar .visited-list-choose:hover {
     background-color: #F2F6FC
 }
@@ -933,7 +940,7 @@ table th {
     position: relative;
 }
 
-.select-wapper>input {
+.select-wapper > input {
     width: 100%;
     height: 100%;
     border: 1px solid #CCCCCC;
@@ -942,16 +949,17 @@ table th {
     box-sizing: border-box;
     border-radius: 4px;
     padding: 5px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-.select-wapper>input:focus {
-    border: 1px solid rgb(102,175,233);
-    -webkit-box-shadow: inset 0 1px 1px rgba(102,175,233, .075);
-    box-shadow: inset 0 1px 1px rgba(122,156,211, .075);
+
+.select-wapper > input:focus {
+    border: 1px solid rgb(102, 175, 233);
+    -webkit-box-shadow: inset 0 1px 1px rgba(102, 175, 233, .075);
+    box-shadow: inset 0 1px 1px rgba(122, 156, 211, .075);
     outline: none;
 }
 
@@ -975,7 +983,7 @@ table th {
     position: absolute;
     top: 100%;
     left: 0;
-    border: 1px solid rgb(122,156,211);
+    border: 1px solid rgb(122, 156, 211);
     margin-top: 0;
     padding: 0;
     overflow-y: auto;
@@ -1001,10 +1009,12 @@ table th {
     background-color: rgb(30, 144, 255);
     color: white !important;
 }
+
 .select-wapper .item-bg {
     background-color: rgb(30, 144, 255);
     color: white !important;
 }
+
 .select-wapper .hidden-cls {
     display: none;
 }
@@ -1012,6 +1022,7 @@ table th {
 .create-app-list .media-left {
     background: #a9d96c;
 }
+
 .create-app-list .create-btn-panel {
     padding-right: 35px;
     padding-bottom: 15px;

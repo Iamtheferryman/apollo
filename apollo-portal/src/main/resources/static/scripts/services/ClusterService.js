@@ -33,12 +33,12 @@ appService.service('ClusterService', ['$resource', '$q', function ($resource, $q
         create_cluster: function (appId, env, cluster) {
             var d = $q.defer();
             cluster_resource.create_cluster({
-                                                appId: appId,
-                                                env: env
-                                            }, cluster,
-                                            function (result) {
-                                                d.resolve(result);
-                                            }, function (result) {
+                    appId: appId,
+                    env: env
+                }, cluster,
+                function (result) {
+                    d.resolve(result);
+                }, function (result) {
                     d.reject(result);
                 });
             return d.promise;
@@ -46,29 +46,29 @@ appService.service('ClusterService', ['$resource', '$q', function ($resource, $q
         load_cluster: function (appId, env, clusterName) {
             var d = $q.defer();
             cluster_resource.load_cluster({
-                appId: appId,
-                env: env,
-                clusterName: clusterName
-            },
-            function (result) {
-                d.resolve(result);
-            }, function (result) {
-                d.reject(result);
-            });
+                    appId: appId,
+                    env: env,
+                    clusterName: clusterName
+                },
+                function (result) {
+                    d.resolve(result);
+                }, function (result) {
+                    d.reject(result);
+                });
             return d.promise;
         },
         delete_cluster: function (appId, env, clusterName) {
             var d = $q.defer();
             cluster_resource.delete_cluster({
-                appId: appId,
-                env: env,
-                clusterName: clusterName
-            },
-            function (result) {
-                d.resolve(result);
-            }, function (result) {
-                d.reject(result);
-            });
+                    appId: appId,
+                    env: env,
+                    clusterName: clusterName
+                },
+                function (result) {
+                    d.resolve(result);
+                }, function (result) {
+                    d.reject(result);
+                });
             return d.promise;
         }
     }

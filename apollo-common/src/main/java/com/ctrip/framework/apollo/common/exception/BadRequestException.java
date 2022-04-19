@@ -21,12 +21,12 @@ import org.springframework.http.HttpStatus;
 
 public class BadRequestException extends AbstractApolloHttpException {
 
-  /**
-   * @see AbstractApolloHttpException#AbstractApolloHttpException(String, Object...) 
-   */
-  public BadRequestException(String msgtpl, Object... args) {
-    super(msgtpl, args);
-    setHttpStatus(HttpStatus.BAD_REQUEST);
-  }
+    /**
+     * @see AbstractApolloHttpException#AbstractApolloHttpException(String, Object...)
+     */
+    public BadRequestException(String msgtpl, Object... args) {
+        super(msgtpl, args);
+        setHttpStatus(HttpStatus.BAD_REQUEST);
+    }
 
 }

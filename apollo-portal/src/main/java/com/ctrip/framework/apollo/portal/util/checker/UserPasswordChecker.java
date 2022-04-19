@@ -18,5 +18,5 @@ package com.ctrip.framework.apollo.portal.util.checker;
 
 public interface UserPasswordChecker {
 
-  CheckResult checkWeakPassword(String password);
+    CheckResult checkWeakPassword(String password);
 }

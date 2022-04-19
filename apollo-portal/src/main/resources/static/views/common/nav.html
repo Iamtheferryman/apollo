@@ -17,18 +17,18 @@
     -->
     <div class="container-fluid">
         <div class="navbar-header">
-            <img class="navbar-brand side-bar-switch cursor-pointer" src="{{ '/img/show_sidebar.png' | prefixPath }}"
-                 onMouseOver="this.style.background='#f1f2f7'"
-                 onMouseOut="this.style.background='#fff'"
-                 data-tooltip="tooltip" data-placement="bottom" title="{{'Common.Nav.ShowNavBar' | translate }}"
-                 ng-show="viewMode == 2 && !showSideBar"
-                 ng-click="showSideBar = !showSideBar">
-            <img class="navbar-brand side-bar-switch cursor-pointer" src="{{ '/img/hide_sidebar.png' | prefixPath }}"
-                 onMouseOver="this.style.background='#f1f2f7'"
-                 onMouseOut="this.style.background='#fff'"
-                 data-tooltip="tooltip" data-placement="bottom" title="{{'Common.Nav.HideNavBar' | translate }}"
-                 ng-show="viewMode == 2 && showSideBar"
-                 ng-click="showSideBar = !showSideBar">
+            <img class="navbar-brand side-bar-switch cursor-pointer" data-placement="bottom"
+                 data-tooltip="tooltip"
+                 ng-click="showSideBar = !showSideBar"
+                 ng-show="viewMode == 2 && !showSideBar" onMouseOut="this.style.background='#fff'" onMouseOver="this.style.background='#f1f2f7'"
+                 src="{{ '/img/show_sidebar.png' | prefixPath }}"
+                 title="{{'Common.Nav.ShowNavBar' | translate }}">
+            <img class="navbar-brand side-bar-switch cursor-pointer" data-placement="bottom"
+                 data-tooltip="tooltip"
+                 ng-click="showSideBar = !showSideBar"
+                 ng-show="viewMode == 2 && showSideBar" onMouseOut="this.style.background='#fff'" onMouseOver="this.style.background='#f1f2f7'"
+                 src="{{ '/img/hide_sidebar.png' | prefixPath }}"
+                 title="{{'Common.Nav.HideNavBar' | translate }}">
             <a class="navbar-brand logo" href="{{ '/' | prefixPath }}">
                 <img class="logo" src="{{ '/img/logo-simple.png' | prefixPath }}">
             </a>
@@ -42,9 +42,11 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img class="nav-switch-lang" style="" src="{{ '/img/language.png' | prefixPath }}">
-                        <span class="glyphicon .glyphicon-glyphicon-font"></span>&nbsp;Language<span class="caret"></span></a>
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                       role="button">
+                        <img class="nav-switch-lang" src="{{ '/img/language.png' | prefixPath }}" style="">
+                        <span class="glyphicon .glyphicon-glyphicon-font"></span>&nbsp;Language<span
+                            class="caret"></span></a>
 
                     <ul class="dropdown-menu">
                         <li value="en"><a href="javascript:void(0)" ng-click="changeLanguage('en')">English</a></li>
@@ -54,32 +56,43 @@
 
                 <!-- admin tool -->
                 <li class="dropdown" ng-if="hasRootPermission == true">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                       role="button">
                         <span class="glyphicon glyphicon-cog"></span>&nbsp;{{'Common.Nav.AdminTools' | translate }}
                         <span class="caret"></span></a>
-                    <ul class="dropdown-menu" >
-                        <li><a ng-href="{{ '/user-manage.html' | prefixPath }}" target="_blank">{{'Common.Nav.UserManage' | translate }}</a></li>
-                        <li><a href="{{ '/system-role-manage.html' | prefixPath }}" target="_blank">{{'Common.Nav.SystemRoleManage' | translate }}</a></li>
-                        <li><a href="{{ '/open/manage.html' | prefixPath }}" target="_blank">{{'Common.Nav.OpenMange' | translate }}</a></li>
-                        <li><a href="{{ '/server_config.html' | prefixPath }}" target="_blank">{{'Common.Nav.SystemConfig' | translate }}</a></li>
-                        <li><a href="{{ '/delete_app_cluster_namespace.html' | prefixPath }}" target="_blank">{{'Common.Nav.DeleteApp-Cluster-Namespace' | translate }}</a></li>
-                        <li><a href="{{ '/system_info.html' | prefixPath }}" target="_blank">{{'Common.Nav.SystemInfo' | translate }}</a></li>
-                        <li><a href="{{ '/config_export.html' | prefixPath }}" target="_blank">{{'Common.Nav.ConfigExport' | translate }}</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a ng-href="{{ '/user-manage.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.UserManage' | translate }}</a></li>
+                        <li><a href="{{ '/system-role-manage.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.SystemRoleManage' | translate }}</a></li>
+                        <li><a href="{{ '/open/manage.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.OpenMange' | translate }}</a></li>
+                        <li><a href="{{ '/server_config.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.SystemConfig' | translate }}</a></li>
+                        <li><a href="{{ '/delete_app_cluster_namespace.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.DeleteApp-Cluster-Namespace' | translate }}</a></li>
+                        <li><a href="{{ '/system_info.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.SystemInfo' | translate }}</a></li>
+                        <li><a href="{{ '/config_export.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.ConfigExport' | translate }}</a></li>
                     </ul>
                 </li>
 
                 <!-- normal user tool (not admin)-->
                 <li class="dropdown" ng-if="hasRootPermission == false">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                       role="button">
                         <span class="glyphicon glyphicon-cog"></span>&nbsp;{{'Common.Nav.NonAdminTools' | translate }}
                         <span class="caret"></span></a>
-                    <ul class="dropdown-menu" >
-                        <li><a href="{{ '/config_export.html' | prefixPath }}" target="_blank">{{'Common.Nav.ConfigExport' | translate }}</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ '/config_export.html' | prefixPath }}"
+                               target="_blank">{{'Common.Nav.ConfigExport' | translate }}</a></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#"
+                       role="button">
                         <span class="glyphicon glyphicon-user"></span>&nbsp;{{userDisplayName}}({{userName}})
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">

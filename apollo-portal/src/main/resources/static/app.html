@@ -17,14 +17,14 @@
 <!doctype html>
 <html ng-app="create_app">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="icon" href="./img/config.png">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <link href="./img/config.png" rel="icon">
     <!-- styles -->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/angular/angular-toastr-1.4.1.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" media='all' href="vendor/angular/loading-bar.min.css">
-    <link rel="stylesheet" type="text/css" href="styles/common-style.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/angular/angular-toastr-1.4.1.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/angular/loading-bar.min.css" media='all' rel="stylesheet" type="text/css">
+    <link href="styles/common-style.css" rel="stylesheet" type="text/css">
 
     <title>{{'App.CreateProject' | translate }}</title>
 </head>
@@ -42,8 +42,8 @@
                 </header>
 
                 <form class="form-horizontal panel-body" name="appForm" ng-controller="CreateAppController"
-                      valdr-type="App"
-                      ng-submit="create()">
+                      ng-submit="create()"
+                      valdr-type="App">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">
                             <apollorequiredfield></apollorequiredfield>
@@ -59,7 +59,7 @@
                             <apollorequiredfield></apollorequiredfield>
                             {{'Common.AppId' | translate }}</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="appId" ng-model="app.appId">
+                            <input class="form-control" name="appId" ng-model="app.appId" type="text">
                             <small>{{'App.AppIdTips' | translate }}
                             </small>
                         </div>
@@ -70,7 +70,7 @@
                             <apollorequiredfield></apollorequiredfield>
                             {{'Common.AppName' | translate }}</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="appName" ng-model="app.name">
+                            <input class="form-control" name="appName" ng-model="app.name" type="text">
                             <small>{{'App.AppNameTips' | translate }}</small>
                         </div>
                     </div>
@@ -79,8 +79,10 @@
                             <apollorequiredfield></apollorequiredfield>
                             {{'Common.AppOwnerLong' | translate }}</label>
                         <div class="col-sm-6 J_ownerSelectorPanel">
-                            <apollouserselector apollo-id="'ownerSelector'"  disabled="isOpenManageAppMasterRoleLimit"></apollouserselector>
-                            <small style="color: maroon" ng-if="isOpenManageAppMasterRoleLimit">{{'App.AppOwnerTips' | translate }}</small>
+                            <apollouserselector apollo-id="'ownerSelector'"
+                                                disabled="isOpenManageAppMasterRoleLimit"></apollouserselector>
+                            <small ng-if="isOpenManageAppMasterRoleLimit"
+                                   style="color: maroon">{{'App.AppOwnerTips' | translate }}</small>
                         </div>
                     </div>
 
@@ -90,7 +92,8 @@
                         </label>
                         <div class="col-sm-9 J_adminSelectorPanel">
 
-                            <apollomultipleuserselector apollo-id="'adminSelector'" ng-disabled="isOpenManageAppMasterRoleLimit"></apollomultipleuserselector>
+                            <apollomultipleuserselector apollo-id="'adminSelector'"
+                                                        ng-disabled="isOpenManageAppMasterRoleLimit"></apollomultipleuserselector>
                             <br>
                             <small>{{'App.AppAdminTips1' | translate }}</small>
                             <br>
@@ -102,8 +105,8 @@
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
 
-                            <button type="submit" class="btn btn-primary"
-                                    ng-disabled="appForm.$invalid || submitBtnDisabled">{{'Common.Submit' | translate }}
+                            <button class="btn btn-primary" ng-disabled="appForm.$invalid || submitBtnDisabled"
+                                    type="submit">{{'Common.Submit' | translate }}
                             </button>
                         </div>
                     </div>
@@ -140,19 +143,19 @@
 <script src="vendor/valdr/valdr.min.js" type="text/javascript"></script>
 <script src="vendor/valdr/valdr-message.min.js" type="text/javascript"></script>
 
-<script type="application/javascript" src="scripts/app.js"></script>
-<script type="application/javascript" src="scripts/services/AppService.js"></script>
-<script type="application/javascript" src="scripts/services/EnvService.js"></script>
-<script type="application/javascript" src="scripts/services/UserService.js"></script>
-<script type="application/javascript" src="scripts/services/CommonService.js"></script>
-<script type="application/javascript" src="scripts/services/PermissionService.js"></script>
-<script type="application/javascript" src="scripts/services/OrganizationService.js"></script>
-<script type="application/javascript" src="scripts/services/SystemRoleService.js"></script>
-<script type="application/javascript" src="scripts/services/UserService.js"></script>
+<script src="scripts/app.js" type="application/javascript"></script>
+<script src="scripts/services/AppService.js" type="application/javascript"></script>
+<script src="scripts/services/EnvService.js" type="application/javascript"></script>
+<script src="scripts/services/UserService.js" type="application/javascript"></script>
+<script src="scripts/services/CommonService.js" type="application/javascript"></script>
+<script src="scripts/services/PermissionService.js" type="application/javascript"></script>
+<script src="scripts/services/OrganizationService.js" type="application/javascript"></script>
+<script src="scripts/services/SystemRoleService.js" type="application/javascript"></script>
+<script src="scripts/services/UserService.js" type="application/javascript"></script>
 
-<script type="application/javascript" src="scripts/AppUtils.js"></script>
-<script type="application/javascript" src="scripts/directive/directive.js"></script>
-<script type="application/javascript" src="scripts/controller/AppController.js"></script>
+<script src="scripts/AppUtils.js" type="application/javascript"></script>
+<script src="scripts/directive/directive.js" type="application/javascript"></script>
+<script src="scripts/controller/AppController.js" type="application/javascript"></script>
 
 <script src="scripts/valdr.js" type="text/javascript"></script>
 </body>

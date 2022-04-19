@@ -72,7 +72,7 @@ function OpenManageController($scope, $translate, toastr, AppUtil, OrganizationS
             .then(function (result) {
                 $scope.envs = new Array();
                 for (var iLoop = 0; iLoop < result.length; iLoop++) {
-                    $scope.envs.push({ checked: false, env: result[iLoop] });
+                    $scope.envs.push({checked: false, env: result[iLoop]});
                     $scope.envsChecked = new Array();
                 }
 
@@ -103,7 +103,7 @@ function OpenManageController($scope, $translate, toastr, AppUtil, OrganizationS
                     $scope.consumerRole.token = consumerToken.token;
                 } else {
                     $scope.consumerToken = {
-                        token: $translate.instant('Open.Manage.AppNotCreated', { appId: $scope.consumer.appId })
+                        token: $translate.instant('Open.Manage.AppNotCreated', {appId: $scope.consumer.appId})
                     };
                 }
             });

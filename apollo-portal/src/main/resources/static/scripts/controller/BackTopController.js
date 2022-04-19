@@ -26,12 +26,12 @@ function BackTopController($scope) {
     }
 
     window.addEventListener("scroll", function () {
-        if(!window.scrollY && $scope.isScroll) {
+        if (!window.scrollY && $scope.isScroll) {
             $scope.isScroll = false
             document.body.click()
         }
 
-        if(window.scrollY != 0 && !$scope.isScroll) {
+        if (window.scrollY != 0 && !$scope.isScroll) {
             $scope.isScroll = true
             document.body.click()
         }

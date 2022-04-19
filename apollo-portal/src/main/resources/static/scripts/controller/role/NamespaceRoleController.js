@@ -18,7 +18,7 @@ role_module.controller('NamespaceRoleController',
     ['$scope', '$location', '$window', '$translate', 'toastr', 'AppService', 'UserService', 'AppUtil', 'EnvService',
         'PermissionService',
         function ($scope, $location, $window, $translate, toastr, AppService, UserService, AppUtil, EnvService,
-            PermissionService) {
+                  PermissionService) {
 
             var params = AppUtil.parseParams($location.$$url);
             $scope.pageContext = {
@@ -59,7 +59,7 @@ role_module.controller('NamespaceRoleController',
                             .then(function (result) {
                                 $scope.envRolesAssignedUsers[result.env] = result;
                             }, function (result) {
-                                toastr.error(AppUtil.errorMsg(result), $translate.instant('Namespace.Role.GetEnvGrantUserError', { env }));
+                                toastr.error(AppUtil.errorMsg(result), $translate.instant('Namespace.Role.GetEnvGrantUserError', {env}));
                             });
                     }
                 });
@@ -96,10 +96,10 @@ role_module.controller('NamespaceRoleController',
                             $scope.ReleaseRoleSubmitBtnDisabled = false;
                             if ($scope.releaseRoleSelectedEnv === "") {
                                 $scope.rolesAssignedUsers.releaseRoleUsers.push(
-                                    { userId: toAssignReleaseNamespaceRoleUser });
+                                    {userId: toAssignReleaseNamespaceRoleUser});
                             } else {
                                 $scope.envRolesAssignedUsers[$scope.releaseRoleSelectedEnv].releaseRoleUsers.push(
-                                    { userId: toAssignReleaseNamespaceRoleUser });
+                                    {userId: toAssignReleaseNamespaceRoleUser});
                             }
 
                             $('.' + $scope.releaseRoleWidgetId).select2("val", "");
@@ -131,10 +131,10 @@ role_module.controller('NamespaceRoleController',
                             $scope.modifyRoleSubmitBtnDisabled = false;
                             if ($scope.modifyRoleSelectedEnv === "") {
                                 $scope.rolesAssignedUsers.modifyRoleUsers.push(
-                                    { userId: toAssignModifyNamespaceRoleUser });
+                                    {userId: toAssignModifyNamespaceRoleUser});
                             } else {
                                 $scope.envRolesAssignedUsers[$scope.modifyRoleSelectedEnv].modifyRoleUsers.push(
-                                    { userId: toAssignModifyNamespaceRoleUser });
+                                    {userId: toAssignModifyNamespaceRoleUser});
                             }
                             $('.' + $scope.modifyRoleWidgetId).select2("val", "");
                             $scope.modifyRoleSelectedEnv = "";
@@ -199,7 +199,6 @@ role_module.controller('NamespaceRoleController',
                 }
                 list.splice(index, 1);
             }
-
 
 
         }]);

@@ -165,14 +165,14 @@ sync_item_module.controller("SyncItemController",
                 ConfigService.sync_items($scope.pageContext.appId,
                     $scope.pageContext.namespaceName,
                     syncData).then(function (result) {
-                        $scope.syncItemStep += 1;
-                        $scope.syncSuccess = true;
-                        $scope.syncBtnDisabled = false;
-                    }, function (result) {
-                        $scope.syncSuccess = false;
-                        $scope.syncBtnDisabled = false;
-                        toastr.error(AppUtil.errorMsg(result));
-                    });
+                    $scope.syncItemStep += 1;
+                    $scope.syncSuccess = true;
+                    $scope.syncBtnDisabled = false;
+                }, function (result) {
+                    $scope.syncSuccess = false;
+                    $scope.syncBtnDisabled = false;
+                    toastr.error(AppUtil.errorMsg(result));
+                });
             }
 
             var selectedClusters = [];
@@ -206,6 +206,7 @@ sync_item_module.controller("SyncItemController",
             ////// flow control ///////
 
             $scope.syncItemStep = 1;
+
             function syncItemNextStep(offset) {
                 $scope.syncItemStep += offset;
             }

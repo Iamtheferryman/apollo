@@ -17,4 +17,6 @@ Use ApolloPortalDB;
 
 ALTER TABLE `Users`
     MODIFY COLUMN `Password` varchar(512) NOT NULL DEFAULT 'default' COMMENT '密码';
-UPDATE `Users` SET `Password` = REPLACE(`Password`, '{nonsensical}', '{placeholder}') WHERE `Password` LIKE '{nonsensical}%';
+UPDATE `Users`
+SET `Password` = REPLACE(`Password`, '{nonsensical}', '{placeholder}')
+WHERE `Password` LIKE '{nonsensical}%';

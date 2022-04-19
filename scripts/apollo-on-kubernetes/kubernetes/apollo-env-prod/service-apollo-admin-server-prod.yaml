@@ -41,7 +41,7 @@ spec:
       port: 8090
       targetPort: 8090
   selector:
-    app: pod-apollo-admin-server-prod  
+    app: pod-apollo-admin-server-prod
   type: ClusterIP
   sessionAffinity: ClientIP
 
@@ -71,16 +71,16 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - pod-apollo-admin-server-prod
-              topologyKey: kubernetes.io/hostname
-      
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - pod-apollo-admin-server-prod
+                topologyKey: kubernetes.io/hostname
+
       volumes:
         - name: volume-configmap-apollo-admin-server-prod
           configMap:
@@ -88,7 +88,7 @@ spec:
             items:
               - key: application-github.properties
                 path: application-github.properties
-      
+
       containers:
         - image: apolloconfig/apollo-adminservice:2.0.0-SNAPSHOT
           securityContext:
@@ -98,22 +98,22 @@ spec:
           ports:
             - protocol: TCP
               containerPort: 8090
-          
+
           volumeMounts:
             - name: volume-configmap-apollo-admin-server-prod
               mountPath: /apollo-adminservice/config/application-github.properties
               subPath: application-github.properties
-          
+
           env:
             - name: APOLLO_ADMIN_SERVICE_NAME
               value: "service-apollo-admin-server-prod.sre"
-          
+
           readinessProbe:
             tcpSocket:
               port: 8090
             initialDelaySeconds: 10
             periodSeconds: 5
-          
+
           livenessProbe:
             tcpSocket:
               port: 8090

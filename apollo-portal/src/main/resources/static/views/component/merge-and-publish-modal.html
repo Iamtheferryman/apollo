@@ -1,4 +1,4 @@
-<div class="modal fade" id="mergeAndPublishModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="mergeAndPublishModal" role="dialog" tabindex="-1">
     <!--
       ~ Copyright 2021 Apollo Authors
       ~
@@ -18,7 +18,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header panel-primary">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">{{'Component.MergePublish.Title' | translate }}</h4>
             </div>
@@ -28,23 +28,24 @@
                 <h5>{{'Component.MergePublish.NextStep' | translate }}</h5>
                 <div class="radio">
                     <label ng-click="toReleaseNamespace.mergeAfterDeleteBranch = 'true'">
-                        <input type="radio" name="deleteBranch" ng-checked="!toReleaseNamespace.mergeAfterDeleteBranch ||
-                                           toReleaseNamespace.mergeAfterDeleteBranch == 'true'">
+                        <input name="deleteBranch" ng-checked="!toReleaseNamespace.mergeAfterDeleteBranch ||
+                                           toReleaseNamespace.mergeAfterDeleteBranch == 'true'" type="radio">
                         {{'Component.MergePublish.DeleteGrayscale' | translate }}
                     </label>
                 </div>
                 <div class="radio">
                     <label ng-click="toReleaseNamespace.mergeAfterDeleteBranch = 'false'">
-                        <input type="radio" name="deleteBranch"
-                            ng-checked="toReleaseNamespace.mergeAfterDeleteBranch == 'false'">
+                        <input name="deleteBranch" ng-checked="toReleaseNamespace.mergeAfterDeleteBranch == 'false'"
+                               type="radio">
                         {{'Component.MergePublish.ReservedGrayscale' | translate }}
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                    data-dismiss="modal">{{'Common.Cancel' | translate }}</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="showReleaseModal()">
+                <button class="btn btn-default" data-dismiss="modal"
+                        type="button">{{'Common.Cancel' | translate }}
+                </button>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="showReleaseModal()" type="button">
                     {{'Common.Ok' | translate }}
                 </button>
             </div>

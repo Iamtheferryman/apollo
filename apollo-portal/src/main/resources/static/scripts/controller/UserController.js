@@ -26,9 +26,9 @@ function UserController($scope, $window, $translate, toastr, AppUtil, UserServic
 
     function initPermission() {
         PermissionService.has_root_permission()
-        .then(function (result) {
-            $scope.isRootUser = result.hasPermission;
-        })
+            .then(function (result) {
+                $scope.isRootUser = result.hasPermission;
+            })
     }
 
     $scope.createOrUpdateUser = function () {

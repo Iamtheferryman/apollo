@@ -15,8 +15,8 @@
  *
  */
 system_info_module.controller('SystemInfoController',
-                              ['$scope', 'toastr', 'AppUtil', 'AppService', 'ClusterService', 'NamespaceService', 'PermissionService', 'SystemInfoService',
-                               SystemInfoController]);
+    ['$scope', 'toastr', 'AppUtil', 'AppService', 'ClusterService', 'NamespaceService', 'PermissionService', 'SystemInfoService',
+        SystemInfoController]);
 
 function SystemInfoController($scope, toastr, AppUtil, AppService, ClusterService, NamespaceService, PermissionService, SystemInfoService) {
 
@@ -28,11 +28,11 @@ function SystemInfoController($scope, toastr, AppUtil, AppService, ClusterServic
     function initPermission() {
         PermissionService.has_root_permission()
             .then(function (result) {
-                  $scope.isRootUser = result.hasPermission;
+                $scope.isRootUser = result.hasPermission;
 
-                  if (result.hasPermission) {
-                      loadSystemInfo();
-                  }
+                if (result.hasPermission) {
+                    loadSystemInfo();
+                }
             })
     }
 

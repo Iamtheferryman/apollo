@@ -18,7 +18,7 @@ cluster_module.controller('ClusterController',
     ['$scope', '$location', '$window', '$translate', 'toastr', 'AppService', 'EnvService', 'ClusterService',
         'AppUtil',
         function ($scope, $location, $window, $translate, toastr, AppService, EnvService, ClusterService,
-            AppUtil) {
+                  AppUtil) {
 
             var params = AppUtil.parseParams($location.$$url);
             $scope.appId = params.appid;
@@ -30,7 +30,7 @@ cluster_module.controller('ClusterController',
             EnvService.find_all_envs().then(function (result) {
                 $scope.envs = [];
                 result.forEach(function (env) {
-                    $scope.envs.push({ name: env, checked: false });
+                    $scope.envs.push({name: env, checked: false});
 
                 });
                 $(".apollo-container").removeClass("hidden");
@@ -61,13 +61,13 @@ cluster_module.controller('ClusterController',
                                 name: $scope.clusterName,
                                 appId: $scope.appId
                             }).then(function (result) {
-                                toastr.success(env.name, $translate.instant('Cluster.ClusterCreated'));
-                                $scope.step = 2;
-                                $scope.submitBtnDisabled = false;
-                            }, function (result) {
-                                toastr.error(AppUtil.errorMsg(result), $translate.instant('Cluster.ClusterCreateFailed'));
-                                $scope.submitBtnDisabled = false;
-                            })
+                            toastr.success(env.name, $translate.instant('Cluster.ClusterCreated'));
+                            $scope.step = 2;
+                            $scope.submitBtnDisabled = false;
+                        }, function (result) {
+                            toastr.error(AppUtil.errorMsg(result), $translate.instant('Cluster.ClusterCreateFailed'));
+                            $scope.submitBtnDisabled = false;
+                        })
                     }
                 });
 

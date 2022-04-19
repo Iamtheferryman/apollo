@@ -30,22 +30,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerClusterOpenApiService implements ClusterOpenApiService {
 
-  private final ClusterService clusterService;
+    private final ClusterService clusterService;
 
-  public ServerClusterOpenApiService(ClusterService clusterService) {
-    this.clusterService = clusterService;
-  }
+    public ServerClusterOpenApiService(ClusterService clusterService) {
+        this.clusterService = clusterService;
+    }
 
-  @Override
-  public OpenClusterDTO getCluster(String appId, String env, String clusterName) {
-    ClusterDTO clusterDTO = clusterService.loadCluster(appId, Env.valueOf(env), clusterName);
-    return clusterDTO == null ? null : OpenApiBeanUtils.transformFromClusterDTO(clusterDTO);
-  }
+    @Override
+    public OpenClusterDTO getCluster(String appId, String env, String clusterName) {
+        ClusterDTO clusterDTO = clusterService.loadCluster(appId, Env.valueOf(env), clusterName);
+        return clusterDTO == null ? null : OpenApiBeanUtils.transformFromClusterDTO(clusterDTO);
+    }
 
-  @Override
-  public OpenClusterDTO createCluster(String env, OpenClusterDTO openClusterDTO) {
-    ClusterDTO toCreate = OpenApiBeanUtils.transformToClusterDTO(openClusterDTO);
-    ClusterDTO createdClusterDTO = clusterService.createCluster(Env.valueOf(env), toCreate);
-    return OpenApiBeanUtils.transformFromClusterDTO(createdClusterDTO);
-  }
+    @Override
+    public OpenClusterDTO createCluster(String env, OpenClusterDTO openClusterDTO) {
+        ClusterDTO toCreate = OpenApiBeanUtils.transformToClusterDTO(openClusterDTO);
+        ClusterDTO createdClusterDTO = clusterService.createCluster(Env.valueOf(env), toCreate);
+        return OpenApiBeanUtils.transformFromClusterDTO(createdClusterDTO);
+    }
 }

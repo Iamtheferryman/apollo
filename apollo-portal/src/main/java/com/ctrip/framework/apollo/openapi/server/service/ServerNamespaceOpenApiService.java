@@ -30,9 +30,10 @@ import com.ctrip.framework.apollo.portal.listener.AppNamespaceCreationEvent;
 import com.ctrip.framework.apollo.portal.service.AppNamespaceService;
 import com.ctrip.framework.apollo.portal.service.NamespaceLockService;
 import com.ctrip.framework.apollo.portal.service.NamespaceService;
-import java.util.List;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author wxq
@@ -40,57 +41,57 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServerNamespaceOpenApiService implements NamespaceOpenApiService {
 
-  private final AppNamespaceService appNamespaceService;
-  private final ApplicationEventPublisher publisher;
-  private final NamespaceService namespaceService;
-  private final NamespaceLockService namespaceLockService;
+    private final AppNamespaceService appNamespaceService;
+    private final ApplicationEventPublisher publisher;
+    private final NamespaceService namespaceService;
+    private final NamespaceLockService namespaceLockService;
 
-  public ServerNamespaceOpenApiService(
-      AppNamespaceService appNamespaceService,
-      ApplicationEventPublisher publisher,
-      NamespaceService namespaceService,
-      NamespaceLockService namespaceLockService) {
-    this.appNamespaceService = appNamespaceService;
-    this.publisher = publisher;
-    this.namespaceService = namespaceService;
-    this.namespaceLockService = namespaceLockService;
-  }
-
-  @Override
-  public OpenNamespaceDTO getNamespace(String appId, String env, String clusterName,
-      String namespaceName) {
-    NamespaceBO namespaceBO = namespaceService.loadNamespaceBO(appId, Env.valueOf
-        (env), clusterName, namespaceName);
-    if (namespaceBO == null) {
-      return null;
+    public ServerNamespaceOpenApiService(
+            AppNamespaceService appNamespaceService,
+            ApplicationEventPublisher publisher,
+            NamespaceService namespaceService,
+            NamespaceLockService namespaceLockService) {
+        this.appNamespaceService = appNamespaceService;
+        this.publisher = publisher;
+        this.namespaceService = namespaceService;
+        this.namespaceLockService = namespaceLockService;
     }
-    return OpenApiBeanUtils.transformFromNamespaceBO(namespaceBO);
-  }
 
-  @Override
-  public List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName) {
-    return OpenApiBeanUtils
-        .batchTransformFromNamespaceBOs(namespaceService.findNamespaceBOs(appId, Env
-            .valueOf(env), clusterName));
-  }
+    @Override
+    public OpenNamespaceDTO getNamespace(String appId, String env, String clusterName,
+                                         String namespaceName) {
+        NamespaceBO namespaceBO = namespaceService.loadNamespaceBO(appId, Env.valueOf
+                (env), clusterName, namespaceName);
+        if (namespaceBO == null) {
+            return null;
+        }
+        return OpenApiBeanUtils.transformFromNamespaceBO(namespaceBO);
+    }
 
-  @Override
-  public OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO) {
-    AppNamespace appNamespace = OpenApiBeanUtils.transformToAppNamespace(appNamespaceDTO);
-    AppNamespace createdAppNamespace = appNamespaceService.createAppNamespaceInLocal(appNamespace, appNamespaceDTO.isAppendNamespacePrefix());
+    @Override
+    public List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName) {
+        return OpenApiBeanUtils
+                .batchTransformFromNamespaceBOs(namespaceService.findNamespaceBOs(appId, Env
+                        .valueOf(env), clusterName));
+    }
 
-    publisher.publishEvent(new AppNamespaceCreationEvent(createdAppNamespace));
+    @Override
+    public OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO) {
+        AppNamespace appNamespace = OpenApiBeanUtils.transformToAppNamespace(appNamespaceDTO);
+        AppNamespace createdAppNamespace = appNamespaceService.createAppNamespaceInLocal(appNamespace, appNamespaceDTO.isAppendNamespacePrefix());
 
-    return OpenApiBeanUtils.transformToOpenAppNamespaceDTO(createdAppNamespace);
-  }
+        publisher.publishEvent(new AppNamespaceCreationEvent(createdAppNamespace));
 
-  @Override
-  public OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName,
-      String namespaceName) {
-    NamespaceDTO namespace = namespaceService.loadNamespaceBaseInfo(appId, Env
-        .valueOf(env), clusterName, namespaceName);
-    NamespaceLockDTO lockDTO = namespaceLockService.getNamespaceLock(appId, Env
-        .valueOf(env), clusterName, namespaceName);
-    return OpenApiBeanUtils.transformFromNamespaceLockDTO(namespace.getNamespaceName(), lockDTO);
-  }
+        return OpenApiBeanUtils.transformToOpenAppNamespaceDTO(createdAppNamespace);
+    }
+
+    @Override
+    public OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName,
+                                                 String namespaceName) {
+        NamespaceDTO namespace = namespaceService.loadNamespaceBaseInfo(appId, Env
+                .valueOf(env), clusterName, namespaceName);
+        NamespaceLockDTO lockDTO = namespaceLockService.getNamespaceLock(appId, Env
+                .valueOf(env), clusterName, namespaceName);
+        return OpenApiBeanUtils.transformFromNamespaceLockDTO(namespace.getNamespaceName(), lockDTO);
+    }
 }

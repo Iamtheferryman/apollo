@@ -17,4 +17,5 @@
 
 Use ApolloPortalDB;
 
-alter table `AppNamespace`  change AppId AppId varchar(64) NOT NULL DEFAULT 'default' COMMENT 'app id';
+alter table `AppNamespace`
+    change AppId AppId varchar(64) NOT NULL DEFAULT 'default' COMMENT 'app id';

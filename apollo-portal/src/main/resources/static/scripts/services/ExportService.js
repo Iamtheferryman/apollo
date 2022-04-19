@@ -28,14 +28,14 @@ appService.service('ExportService', ['$resource', '$q', function ($resource, $q)
             form.append('file', file);
             var d = $q.defer();
             resource.importConfig({
-                data: form,
-                envs: envs,
-            },
-            function (result) {
-                d.resolve(result);
-            }, function (result) {
-                d.reject(result);
-            });
+                    data: form,
+                    envs: envs,
+                },
+                function (result) {
+                    d.resolve(result);
+                }, function (result) {
+                    d.reject(result);
+                });
             return d.promise;
         }
     }

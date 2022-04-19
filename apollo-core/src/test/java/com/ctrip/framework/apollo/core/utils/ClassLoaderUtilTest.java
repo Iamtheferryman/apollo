@@ -16,38 +16,39 @@
  */
 package com.ctrip.framework.apollo.core.utils;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class ClassLoaderUtilTest {
-  private static boolean shouldFailInInitialization = false;
-  @Test
-  public void testGetClassLoader() {
-    assertNotNull(ClassLoaderUtil.getLoader());
-  }
+    private static boolean shouldFailInInitialization = false;
 
-  @Test
-  public void testIsClassPresent() {
-    assertTrue(ClassLoaderUtil.isClassPresent("java.lang.String"));
-  }
-
-  @Test
-  public void testIsClassPresentWithClassNotFound() {
-    assertFalse(ClassLoaderUtil.isClassPresent("java.lang.StringNotFound"));
-  }
-
-  @Test
-  public void testIsClassPresentWithLinkageError() {
-    shouldFailInInitialization = true;
-    assertFalse(ClassLoaderUtil.isClassPresent(ClassWithInitializationError.class.getName()));
-  }
-
-  public static class ClassWithInitializationError {
-    static {
-      if (ClassLoaderUtilTest.shouldFailInInitialization) {
-        throw new RuntimeException("Some initialization exception");
-      }
+    @Test
+    public void testGetClassLoader() {
+        assertNotNull(ClassLoaderUtil.getLoader());
     }
-  }
+
+    @Test
+    public void testIsClassPresent() {
+        assertTrue(ClassLoaderUtil.isClassPresent("java.lang.String"));
+    }
+
+    @Test
+    public void testIsClassPresentWithClassNotFound() {
+        assertFalse(ClassLoaderUtil.isClassPresent("java.lang.StringNotFound"));
+    }
+
+    @Test
+    public void testIsClassPresentWithLinkageError() {
+        shouldFailInInitialization = true;
+        assertFalse(ClassLoaderUtil.isClassPresent(ClassWithInitializationError.class.getName()));
+    }
+
+    public static class ClassWithInitializationError {
+        static {
+            if (ClassLoaderUtilTest.shouldFailInInitialization) {
+                throw new RuntimeException("Some initialization exception");
+            }
+        }
+    }
 }

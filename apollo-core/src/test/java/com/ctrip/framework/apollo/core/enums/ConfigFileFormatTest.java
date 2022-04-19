@@ -16,14 +16,15 @@
  */
 package com.ctrip.framework.apollo.core.enums;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.ArrayList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Tests the {@link ConfigFileFormat} enum.
@@ -32,101 +33,101 @@ import org.junit.rules.ExpectedException;
  */
 public class ConfigFileFormatTest {
 
-  @Rule
-  public ExpectedException expectedEx = ExpectedException.none();
+    @Rule
+    public ExpectedException expectedEx = ExpectedException.none();
 
-  @Test
-  public void testFromStringEqualsOriginal() {
-    assertEquals(ConfigFileFormat.Properties,
-        ConfigFileFormat.fromString(ConfigFileFormat.Properties.getValue()));
-    assertEquals(ConfigFileFormat.XML,
-        ConfigFileFormat.fromString(ConfigFileFormat.XML.getValue()));
-    assertEquals(ConfigFileFormat.JSON,
-        ConfigFileFormat.fromString(ConfigFileFormat.JSON.getValue()));
-    assertEquals(ConfigFileFormat.YML,
-        ConfigFileFormat.fromString(ConfigFileFormat.YML.getValue()));
-    assertEquals(ConfigFileFormat.YAML,
-        ConfigFileFormat.fromString(ConfigFileFormat.YAML.getValue()));
-    assertEquals(ConfigFileFormat.TXT,
-        ConfigFileFormat.fromString(ConfigFileFormat.TXT.getValue()));
-  }
+    @Test
+    public void testFromStringEqualsOriginal() {
+        assertEquals(ConfigFileFormat.Properties,
+                ConfigFileFormat.fromString(ConfigFileFormat.Properties.getValue()));
+        assertEquals(ConfigFileFormat.XML,
+                ConfigFileFormat.fromString(ConfigFileFormat.XML.getValue()));
+        assertEquals(ConfigFileFormat.JSON,
+                ConfigFileFormat.fromString(ConfigFileFormat.JSON.getValue()));
+        assertEquals(ConfigFileFormat.YML,
+                ConfigFileFormat.fromString(ConfigFileFormat.YML.getValue()));
+        assertEquals(ConfigFileFormat.YAML,
+                ConfigFileFormat.fromString(ConfigFileFormat.YAML.getValue()));
+        assertEquals(ConfigFileFormat.TXT,
+                ConfigFileFormat.fromString(ConfigFileFormat.TXT.getValue()));
+    }
 
-  @Test
-  public void testNonExistingValueFromString() {
-    expectedEx.expect(IllegalArgumentException.class);
-    expectedEx.expectMessage("thisShouldNotExistPropertiesXML can not map enum");
+    @Test
+    public void testNonExistingValueFromString() {
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage("thisShouldNotExistPropertiesXML can not map enum");
 
-    ConfigFileFormat.fromString("thisShouldNotExistPropertiesXML");
-  }
+        ConfigFileFormat.fromString("thisShouldNotExistPropertiesXML");
+    }
 
-  @Test
-  public void testEmptyValueFromString() {
-    expectedEx.expect(IllegalArgumentException.class);
-    expectedEx.expectMessage("value can not be empty");
+    @Test
+    public void testEmptyValueFromString() {
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage("value can not be empty");
 
-    ConfigFileFormat.fromString("");
-  }
+        ConfigFileFormat.fromString("");
+    }
 
-  @Test
-  public void testSpacedValueFromString() {
-    expectedEx.expect(IllegalArgumentException.class);
-    expectedEx.expectMessage(" can not map enum");
+    @Test
+    public void testSpacedValueFromString() {
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage(" can not map enum");
 
-    ConfigFileFormat.fromString("    ");
-  }
+        ConfigFileFormat.fromString("    ");
+    }
 
-  @Test
-  public void testSpecialCharsValueFromString() {
-    ArrayList<String> specialChars = new ArrayList<>();
-    specialChars.add(" ");
-    specialChars.add("\t");
-    specialChars.add(" \t");
-    specialChars.add(" \t ");
-    specialChars.add("\t ");
+    @Test
+    public void testSpecialCharsValueFromString() {
+        ArrayList<String> specialChars = new ArrayList<>();
+        specialChars.add(" ");
+        specialChars.add("\t");
+        specialChars.add(" \t");
+        specialChars.add(" \t ");
+        specialChars.add("\t ");
 
-    specialChars.forEach(item -> {
-      assertEquals(ConfigFileFormat.Properties,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.Properties.getValue() + item));
-      assertEquals(ConfigFileFormat.XML,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.XML.getValue() + item));
-      assertEquals(ConfigFileFormat.JSON,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.JSON.getValue() + item));
-      assertEquals(ConfigFileFormat.YML,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.YML.getValue() + item));
-      assertEquals(ConfigFileFormat.YAML,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.YAML.getValue() + item));
-      assertEquals(ConfigFileFormat.TXT,
-          ConfigFileFormat.fromString(item + ConfigFileFormat.TXT.getValue() + item));
-    });
-  }
+        specialChars.forEach(item -> {
+            assertEquals(ConfigFileFormat.Properties,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.Properties.getValue() + item));
+            assertEquals(ConfigFileFormat.XML,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.XML.getValue() + item));
+            assertEquals(ConfigFileFormat.JSON,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.JSON.getValue() + item));
+            assertEquals(ConfigFileFormat.YML,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.YML.getValue() + item));
+            assertEquals(ConfigFileFormat.YAML,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.YAML.getValue() + item));
+            assertEquals(ConfigFileFormat.TXT,
+                    ConfigFileFormat.fromString(item + ConfigFileFormat.TXT.getValue() + item));
+        });
+    }
 
-  @Test
-  public void testIsValidFormatForOriginalContent() {
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.Properties.getValue()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.XML.getValue()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.JSON.getValue()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YML.getValue()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YAML.getValue()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.TXT.getValue()));
+    @Test
+    public void testIsValidFormatForOriginalContent() {
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.Properties.getValue()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.XML.getValue()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.JSON.getValue()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YML.getValue()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YAML.getValue()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.TXT.getValue()));
 
-    assertTrue(
-        ConfigFileFormat.isValidFormat(ConfigFileFormat.Properties.getValue().toUpperCase()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.XML.getValue().toUpperCase()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.JSON.getValue().toUpperCase()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YML.getValue().toUpperCase()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YAML.getValue().toUpperCase()));
-    assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.TXT.getValue().toUpperCase()));
-  }
+        assertTrue(
+                ConfigFileFormat.isValidFormat(ConfigFileFormat.Properties.getValue().toUpperCase()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.XML.getValue().toUpperCase()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.JSON.getValue().toUpperCase()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YML.getValue().toUpperCase()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.YAML.getValue().toUpperCase()));
+        assertTrue(ConfigFileFormat.isValidFormat(ConfigFileFormat.TXT.getValue().toUpperCase()));
+    }
 
-  @Test
-  public void testIsValidFormatForInvalid() {
-    assertFalse(ConfigFileFormat.isValidFormat("thisshouldnotexist"));
-  }
+    @Test
+    public void testIsValidFormatForInvalid() {
+        assertFalse(ConfigFileFormat.isValidFormat("thisshouldnotexist"));
+    }
 
-  @Test
-  public void testIfPropertiesCompatible() {
-    assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.YAML));
-    assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.YML));
-    assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.Properties));
-  }
+    @Test
+    public void testIfPropertiesCompatible() {
+        assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.YAML));
+        assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.YML));
+        assertTrue(ConfigFileFormat.isPropertiesCompatible(ConfigFileFormat.Properties));
+    }
 }
