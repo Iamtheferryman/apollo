@@ -90,7 +90,8 @@
                                     <tbody>
                                     <tr ng-click="toggleEnvCheckedStatus(env)" ng-repeat="env in envs"
                                         style="cursor: pointer">
-                                        <td width="10%"><input ng-checked="env.checked" ng-click="switchChecked(env, $event)"
+                                        <td width="10%"><input ng-checked="env.checked"
+                                                               ng-click="switchChecked(env, $event)"
                                                                type="checkbox"></td>
                                         <td ng-bind="env.name" width="30%"></td>
                                     </tr>

@@ -79,9 +79,9 @@ a_nested_map:
   that has multiple lines
   : and this is its value
 
-# YAML also allows mapping between sequences with the complex key syntax
-# Some language parsers might complain
-# An example
+  # YAML also allows mapping between sequences with the complex key syntax
+  # Some language parsers might complain
+  # An example
 ? - Manchester United
   - Real Madrid
   : [ 2001-01-01, 2002-02-02 ]

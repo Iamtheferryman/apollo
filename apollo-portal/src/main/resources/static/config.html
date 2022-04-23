@@ -153,7 +153,8 @@
                         </div>
                     </a>
 
-                    <apolloentrance apollo-href="'cluster.html?#/appid=' + pageContext.appId" apollo-img-src="'plus-orange'"
+                    <apolloentrance apollo-href="'cluster.html?#/appid=' + pageContext.appId"
+                                    apollo-img-src="'plus-orange'"
                                     apollo-title="'Config.AddCluster' | translate"
                                     ng-show="hasCreateClusterPermission"></apolloentrance>
 
@@ -164,7 +165,8 @@
                         </div>
                     </div>
 
-                    <apolloentrance apollo-href="'namespace.html?#/appid=' + pageContext.appId" apollo-img-src="'plus-orange'"
+                    <apolloentrance apollo-href="'namespace.html?#/appid=' + pageContext.appId"
+                                    apollo-img-src="'plus-orange'"
                                     apollo-title="'Config.AddNamespace' | translate"
                                     ng-show="hasCreateNamespacePermission"></apolloentrance>
 
@@ -191,7 +193,8 @@
             {{'Config.CurrentlyOperatorEnv' | translate }}:{{pageContext.env}}，
             {{'Common.Cluster' | translate }}:{{pageContext.clusterName}}
         </h4>
-        <div class="alert alert-info alert-dismissible" ng-show="(!hideTip || !hideTip[pageContext.appId][pageContext.clusterName]) && envMapClusters[pageContext.env]"
+        <div class="alert alert-info alert-dismissible"
+             ng-show="(!hideTip || !hideTip[pageContext.appId][pageContext.clusterName]) && envMapClusters[pageContext.env]"
              role="alert">
 
             <button class="btn btn-sm btn-default pull-right" ng-click="closeTip(pageContext.clusterName)"
@@ -222,7 +225,8 @@
         </div>
 
         <apollonspanel app-id="pageContext.appId" cluster="pageContext.clusterName" create-item="createItem"
-                       edit-item="editItem" env="pageContext.env" lazy-load="namespaces.length > 10" lock-check="lockCheck"
+                       edit-item="editItem" env="pageContext.env" lazy-load="namespaces.length > 10"
+                       lock-check="lockCheck"
                        namespace="namespace" ng-repeat="namespace in namespaces" pre-create-branch="preCreateBranch"
                        pre-delete-branch="preDeleteBranch" pre-delete-item="preDeleteItem"
                        pre-release-ns="prepareReleaseNamespace"
@@ -339,7 +343,8 @@
 
         <apolloconfirmdialog apollo-detail="syntaxCheckContext.syntaxCheckMessage"
                              apollo-dialog-id="'syntaxCheckFailedDialog'"
-                             apollo-extra-class="'pre'" apollo-title="'Config.SyntaxCheckFailed.DialogTitle' | translate">
+                             apollo-extra-class="'pre'"
+                             apollo-title="'Config.SyntaxCheckFailed.DialogTitle' | translate">
         </apolloconfirmdialog>
 
         <apolloconfirmdialog apollo-confirm="revokeItem"

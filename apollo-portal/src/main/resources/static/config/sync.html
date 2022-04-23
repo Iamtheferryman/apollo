@@ -44,7 +44,8 @@
                     </h4>
                 </div>
                 <div class="col-md-5 text-right">
-                    <button class="btn btn-primary" ng-click="syncItemNextStep(-1)" ng-show="syncItemStep > 1 && syncItemStep < 3"
+                    <button class="btn btn-primary" ng-click="syncItemNextStep(-1)"
+                            ng-show="syncItemStep > 1 && syncItemStep < 3"
                             type="button">{{'Config.Sync.PreviousStep' | translate }}
                     </button>
                     <button class="btn btn-primary" ng-click="diff()" ng-show="syncItemStep < 2"
@@ -174,7 +175,8 @@
                     {{'Config.Sync.IgnoreSync' | translate }}
                 </div>
 
-                <div class="row" ng-show="clusterDiff.diffs.updateItems.length + clusterDiff.diffs.createItems.length > 0"
+                <div class="row"
+                     ng-show="clusterDiff.diffs.updateItems.length + clusterDiff.diffs.createItems.length > 0"
                      style="margin-top: 10px;">
                     <div class="form-horizontal">
                         <div class="col-sm-12">

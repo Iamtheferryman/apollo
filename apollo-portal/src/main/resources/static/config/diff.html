@@ -53,7 +53,8 @@
                     </h4>
                 </div>
                 <div class="col-md-5 text-right">
-                    <button class="btn btn-primary" ng-click="syncItemNextStep(-1)" ng-show="syncItemStep > 1 && syncItemStep < 3"
+                    <button class="btn btn-primary" ng-click="syncItemNextStep(-1)"
+                            ng-show="syncItemStep > 1 && syncItemStep < 3"
                             type="button">{{'Config.Diff.PreviousStep' | translate }}
                     </button>
                     <button class="btn btn-primary" ng-click="diff()" ng-show="syncItemStep < 2"
@@ -94,7 +95,8 @@
                     <div class="form-horizontal">
                         <div class="col-sm-12">
                             <label class="control-label">
-                                <input class="comment-toggle" ng-checked="showCommentDiff" ng-click="showCommentDiff=!showCommentDiff"
+                                <input class="comment-toggle" ng-checked="showCommentDiff"
+                                       ng-click="showCommentDiff=!showCommentDiff"
                                        type="checkbox">
                                 {{'Config.Diff.HasDiffComment' | translate }}
                             </label>

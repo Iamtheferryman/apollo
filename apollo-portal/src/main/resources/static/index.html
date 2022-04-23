@@ -135,11 +135,13 @@
                         <td style="width: 15%">{{ app.ownerName }}</td>
                         <td style="width: 20%">{{ app.ownerEmail }}</td>
                         <td style="width: 10%">
-                            <button class="btn btn-default btn-xs" ng-click="toTop(app.favoriteId);$event.stopPropagation();"
+                            <button class="btn btn-default btn-xs"
+                                    ng-click="toTop(app.favoriteId);$event.stopPropagation();"
                                     title="{{'Index.Topping' | translate }}">
                                 <img class="i-15" src="img/top.png">
                             </button>
-                            <button class="btn btn-default btn-xs" ng-click="deleteFavorite(app.favoriteId);$event.stopPropagation();"
+                            <button class="btn btn-default btn-xs"
+                                    ng-click="deleteFavorite(app.favoriteId);$event.stopPropagation();"
                                     title="{{'Index.FavoriteCancel' | translate }}">
                                 <img class="i-15" src="img/like.png">
                             </button>

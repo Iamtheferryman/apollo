@@ -43,7 +43,8 @@
                     </h4>
                 </div>
                 <div class="col-md-3 text-right">
-                    <a class="btn btn-info" data-dismiss="modal" href="{{ '/config.html' | prefixPath }}?#appid={{pageContext.appId}}"
+                    <a class="btn btn-info" data-dismiss="modal"
+                       href="{{ '/config.html' | prefixPath }}?#appid={{pageContext.appId}}"
                        type="button">{{'Common.ReturnToIndex' | translate
                         }}
                     </a>
@@ -77,7 +78,8 @@
 
                             <div class="btn-group item-info" ng-repeat="user in appRoleUsers.masterUsers">
                                 <button class="btn btn-default" ng-bind="user.userId" type="button"></button>
-                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle"
+                                <button aria-expanded="false" aria-haspopup="true"
+                                        class="btn btn-default dropdown-toggle"
                                         data-toggle="dropdown" ng-click="removeMasterRoleFromUser(user.userId)"
                                         type="button">
                                     <span class="glyphicon glyphicon-remove"></span>
@@ -124,7 +126,8 @@
                                 {{'App.Setting.ProjectName' | translate }}
                             </label>
                             <div class="col-sm-4">
-                                <input class="form-control" name="appName" ng-disabled="!display.app.edit" ng-model="viewApp.name"
+                                <input class="form-control" name="appName" ng-disabled="!display.app.edit"
+                                       ng-model="viewApp.name"
                                        type="text">
                                 <small>{{'App.Setting.ProjectNameTips' | translate }}</small>
                             </div>
@@ -142,7 +145,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-9">
-                                <button class="btn btn-primary" ng-click="toggleEditStatus()" ng-show="!display.app.edit"
+                                <button class="btn btn-primary" ng-click="toggleEditStatus()"
+                                        ng-show="!display.app.edit"
                                         type="button">
                                     {{'App.Setting.Modify' | translate }}
                                 </button>
@@ -150,7 +154,8 @@
                                         type="button">
                                     {{'App.Setting.Cancel' | translate }}
                                 </button>
-                                <button class="btn btn-primary" ng-disabled="appForm.$invalid || submitBtnDisabled" ng-show="display.app.edit"
+                                <button class="btn btn-primary" ng-disabled="appForm.$invalid || submitBtnDisabled"
+                                        ng-show="display.app.edit"
                                         type="submit">
                                     {{'Common.Submit' | translate }}
                                 </button>

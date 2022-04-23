@@ -78,11 +78,13 @@
                     </div>
                     <div class="row text-right" style="padding-right: 20px;">
                         <div aria-label="..." class="btn-group btn-group-sm" role="group">
-                            <button class="btn btn-default" ng-class="{active:type=='link'}" ng-click="switchType('link')"
+                            <button class="btn btn-default" ng-class="{active:type=='link'}"
+                                    ng-click="switchType('link')"
                                     type="button">{{'Namespace.AssociationPublicNamespace' | translate
                                 }}
                             </button>
-                            <button class="btn btn-default" ng-class="{active:type=='create'}" ng-click="switchType('create')"
+                            <button class="btn btn-default" ng-class="{active:type=='create'}"
+                                    ng-click="switchType('create')"
                                     type="button">{{'Namespace.CreateNamespace' | translate }}
                             </button>
                         </div>
@@ -137,7 +139,8 @@
 
                             &nbsp;&nbsp;
                             <span ng-bind="concatNamespace()"
-                                  ng-show="appNamespace.isPublic && appendNamespacePrefix" style="line-height: 34px;"></span>
+                                  ng-show="appNamespace.isPublic && appendNamespacePrefix"
+                                  style="line-height: 34px;"></span>
                         </div>
 
                         <div class="form-group" ng-show="type == 'create' && appNamespace.isPublic">
@@ -163,12 +166,14 @@
                             </label>
                             <div class="col-sm-4" valdr-form-group>
                                 <label class="radio-inline">
-                                    <input name="namespaceType" ng-model="appNamespace.isPublic" ng-value="true" type="radio"
+                                    <input name="namespaceType" ng-model="appNamespace.isPublic" ng-value="true"
+                                           type="radio"
                                            value="true">
                                     {{'Namespace.NamespaceType.Public' | translate }}
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="namespaceType" ng-model="appNamespace.isPublic" ng-value="false" type="radio"
+                                    <input name="namespaceType" ng-model="appNamespace.isPublic" ng-value="false"
+                                           type="radio"
                                            value="false">
                                     {{'Namespace.NamespaceType.Private' | translate }}
                                 </label>
@@ -195,7 +200,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-10">
-                                <button class="btn btn-primary" ng-disabled="(type == 'create' && namespaceForm.$invalid) || submitBtnDisabled"
+                                <button class="btn btn-primary"
+                                        ng-disabled="(type == 'create' && namespaceForm.$invalid) || submitBtnDisabled"
                                         type="submit">
                                     {{'Common.Submit' | translate }}
                                 </button>

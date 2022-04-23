@@ -13,12 +13,19 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 --
-DELETE FROM Release;
-DELETE FROM Namespace;
-DELETE FROM AppNamespace;
-DELETE FROM Cluster;
-DELETE FROM App;
-DELETE FROM ReleaseMessage;
-DELETE FROM GrayReleaseRule;
+DELETE
+FROM Release;
+DELETE
+FROM Namespace;
+DELETE
+FROM AppNamespace;
+DELETE
+FROM Cluster;
+DELETE
+FROM App;
+DELETE
+FROM ReleaseMessage;
+DELETE
+FROM GrayReleaseRule;
 
 

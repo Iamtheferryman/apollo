@@ -36,21 +36,25 @@
             </div>
 
             <div class="col-md-6 col-sm-6 text-right header-buttons">
-                <a class="btn btn-success btn-sm" data-placement="bottom" data-tooltip="tooltip" ng-click="publish(namespace.branch)"
+                <a class="btn btn-success btn-sm" data-placement="bottom" data-tooltip="tooltip"
+                   ng-click="publish(namespace.branch)"
                    ng-show="(namespace.hasReleasePermission || namespace.hasModifyPermission)"
                    title="{{'Component.Namespace.Branch.ContinueGrayscalePublish' | translate }}"
                    type="button">
                     {{'Component.Namespace.Branch.GrayscalePublish' | translate }}
                 </a>
-                <a class="btn btn-primary btn-sm" data-placement="bottom" data-tooltip="tooltip" ng-click="mergeAndPublish(namespace.branch)"
+                <a class="btn btn-primary btn-sm" data-placement="bottom" data-tooltip="tooltip"
+                   ng-click="mergeAndPublish(namespace.branch)"
                    ng-show="(namespace.hasReleasePermission || namespace.hasModifyPermission)"
                    title="{{'Component.Namespace.Branch.MergeToMasterAndPublish' | translate }}"
                    type="button">
                     {{'Component.Namespace.Branch.AllPublish' | translate }}
                 </a>
-                <a class="btn btn-warning btn-sm" data-placement="bottom" data-tooltip="tooltip" ng-click="preDeleteBranch(namespace.branch)"
+                <a class="btn btn-warning btn-sm" data-placement="bottom" data-tooltip="tooltip"
+                   ng-click="preDeleteBranch(namespace.branch)"
                    ng-show="(namespace.hasReleasePermission
-                       || (!namespace.branch.latestRelease && namespace.hasModifyPermission))" title="{{'Component.Namespace.Branch.DiscardGrayscaleVersion' | translate }}"
+                       || (!namespace.branch.latestRelease && namespace.hasModifyPermission))"
+                   title="{{'Component.Namespace.Branch.DiscardGrayscaleVersion' | translate }}"
                    type="button">
                     {{'Component.Namespace.Branch.DiscardGrayscale' | translate }}
                 </a>
@@ -111,7 +115,8 @@
                 <div class="panel panel-default" ng-if="namespace.hasBranch">
                     <div class="panel-heading">
                         {{'Component.Namespace.Branch.Body.Item' | translate }}
-                        <button class="btn btn-primary btn-sm pull-right" ng-click="createItem(namespace.branch)" ng-show="namespace.hasModifyPermission"
+                        <button class="btn btn-primary btn-sm pull-right" ng-click="createItem(namespace.branch)"
+                                ng-show="namespace.hasModifyPermission"
                                 style="margin-top: -4px;" type="button">
                             <img src="img/plus.png">
                             {{'Component.Namespace.Branch.Body.AddedItem' | translate }}
@@ -216,11 +221,13 @@
                             </td>
 
                             <td class="text-center" width="9%">
-                                <img data-placement="bottom" data-tooltip="tooltip" ng-click="editItem(namespace.branch, config.item)"
+                                <img data-placement="bottom" data-tooltip="tooltip"
+                                     ng-click="editItem(namespace.branch, config.item)"
                                      ng-if="!config.isDeleted"
                                      ng-show="namespace.hasModifyPermission" src="img/edit.png"
                                      title="{{'Component.Namespace.Branch.Body.Op.Modify' | translate }}">
-                                <img data-placement="bottom" data-tooltip="tooltip" ng-click="preDeleteItem(namespace.branch, config.item)"
+                                <img data-placement="bottom" data-tooltip="tooltip"
+                                     ng-click="preDeleteItem(namespace.branch, config.item)"
                                      ng-if="!config.isDeleted"
                                      ng-show="namespace.hasModifyPermission"
                                      src="img/cancel.png"
@@ -298,7 +305,8 @@
                                     }}</span>
                                 <span class="label label-info"
                                       data-placement="bottom"
-                                      data-tooltip="tooltip" ng-if="config.isModified && config.oldValue && !config.isDeleted"
+                                      data-tooltip="tooltip"
+                                      ng-if="config.isModified && config.oldValue && !config.isDeleted"
                                       title="{{'Component.Namespace.Branch.Body.ModifiedItem' | translate }}">{{'Component.Namespace.Branch.Body.Modify' | translate
                                     }}</span>
                                 <span class="label label-danger" data-placement="bottom" data-tooltip="tooltip"
@@ -324,7 +332,8 @@
                             </td>
 
                             <td class="text-center" width="5%">
-                                <img data-placement="bottom" data-tooltip="tooltip" ng-click="editItem(namespace.branch, config.item)"
+                                <img data-placement="bottom" data-tooltip="tooltip"
+                                     ng-click="editItem(namespace.branch, config.item)"
                                      ng-if="!config.isDeleted"
                                      ng-show="namespace.hasModifyPermission" src="img/gray.png"
                                      title="{{'Component.Namespace.MasterBranch.Body.ModifyItem' | translate }}">
@@ -355,7 +364,8 @@
                     <tbody>
                     <tr ng-repeat="ruleItem in namespace.branch.rules.ruleItems">
                         <td ng-bind="ruleItem.clientAppId" width="20%"></td>
-                        <td ng-bind="'ipList: '+ ruleItem.clientIpList.join(', ') + '   labelList: ' + ruleItem.clientLabelList.join(', ')" ng-show="!ruleItem.ApplyToAllInstances"
+                        <td ng-bind="'ipList: '+ ruleItem.clientIpList.join(', ') + '   labelList: ' + ruleItem.clientLabelList.join(', ')"
+                            ng-show="!ruleItem.ApplyToAllInstances"
                             width="70%"></td>
                         <td ng-show="ruleItem.ApplyToAllInstances" width="70%">
                             {{'Component.Namespace.Branch.GrayScaleRule.ApplyToAllInstances' | translate }}
@@ -367,7 +377,8 @@
                                  src="img/edit.png"
                                  title="{{'Component.Namespace.Branch.GrayScaleRule.Modify' | translate }}">
                             <img class="i-20 hover" data-placement="bottom" data-tooltip="tooltip"
-                                 ng-click="deleteRuleItem(namespace.branch, ruleItem)" ng-show="namespace.hasModifyPermission || namespace.hasReleasePermission"
+                                 ng-click="deleteRuleItem(namespace.branch, ruleItem)"
+                                 ng-show="namespace.hasModifyPermission || namespace.hasReleasePermission"
                                  src="img/cancel.png"
                                  style="margin-left: 5px;"
                                  title="{{'Component.Namespace.Branch.GrayScaleRule.Delete' | translate }}">
@@ -402,7 +413,8 @@
                 <div class="panel-body">
                     <div class="panel-default" ng-if="namespace.branch.latestReleaseInstances.total > 0">
                         <div class="panel-heading">
-                            <a data-placement="bottom" data-tooltip="tooltip" ng-href="{{ '/config/history.html' | prefixPath }}?#/appid={{appId}}&env={{env}}&clusterName={{namespace.baseInfo.clusterName}}&namespaceName={{namespace.baseInfo.namespaceName}}&releaseId={{namespace.branch.latestRelease.id}}"
+                            <a data-placement="bottom" data-tooltip="tooltip"
+                               ng-href="{{ '/config/history.html' | prefixPath }}?#/appid={{appId}}&env={{env}}&clusterName={{namespace.baseInfo.clusterName}}&namespaceName={{namespace.baseInfo.namespaceName}}&releaseId={{namespace.branch.latestRelease.id}}"
                                target="_blank"
                                title="{{'Component.Namespace.Branch.Instance.ItemToSee' | translate }}">
                                 {{namespace.branch.latestRelease.name}}
@@ -517,12 +529,14 @@
                                     <span ng-bind="item.newItem.key | limitTo: 250"></span>
                                     <span ng-bind="item.newItem.key.length > 250 ? '...' :''"></span>
                                 </td>
-                                <td class="cursor-pointer" ng-click="showText(item.oldItem.value)" title="{{item.oldItem.value}}"
+                                <td class="cursor-pointer" ng-click="showText(item.oldItem.value)"
+                                    title="{{item.oldItem.value}}"
                                     width="28%">
                                     <span ng-bind="item.oldItem.value | limitTo: 250"></span>
                                     <span ng-bind="item.oldItem.value.length > 250 ? '...': ''"></span>
                                 </td>
-                                <td class="cursor-pointer" ng-click="showText(item.newItem.value)" title="{{item.newItem.value}}"
+                                <td class="cursor-pointer" ng-click="showText(item.newItem.value)"
+                                    title="{{item.newItem.value}}"
                                     width="28%">
                                     <span ng-bind="item.newItem.value | limitTo: 250"></span>
                                     <span ng-bind="item.newItem.value.length > 250 ? '...': ''"></span>
@@ -597,12 +611,14 @@
                                 <td width="6%">
                                     {{'Component.Namespace.Branch.History.Modified' | translate }}
                                 </td>
-                                <td class="cursor-pointer" ng-click="showText(item.oldItem.value)" title="{{item.oldItem.value}}"
+                                <td class="cursor-pointer" ng-click="showText(item.oldItem.value)"
+                                    title="{{item.oldItem.value}}"
                                     width="28%">
                                     <span ng-bind="item.oldItem.value | limitTo: 250"></span>
                                     <span ng-bind="item.oldItem.value.length > 250 ? '...': ''"></span>
                                 </td>
-                                <td class="cursor-pointer" ng-click="showText(item.newItem.value)" title="{{item.newItem.value}}"
+                                <td class="cursor-pointer" ng-click="showText(item.newItem.value)"
+                                    title="{{item.newItem.value}}"
                                     width="28%">
                                     <span ng-bind="item.newItem.value | limitTo: 250"></span>
                                     <span ng-bind="item.newItem.value.length > 250 ? '...': ''"></span>
@@ -635,7 +651,8 @@
                     <hr>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-default" ng-click="loadCommitHistory(namespace.branch)" ng-show="!namespace.branch.hasLoadAllCommit"
+                    <button class="btn btn-default" ng-click="loadCommitHistory(namespace.branch)"
+                            ng-show="!namespace.branch.hasLoadAllCommit"
                             type="button">
                         {{'Component.Namespace.Branch.History.LoadMore' | translate }}
                         <span class="glyphicon glyphicon-menu-down"></span></button>

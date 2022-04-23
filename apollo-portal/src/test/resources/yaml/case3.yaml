@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 !!javax.script.ScriptEngineManager [
-  !!java.net.URLClassLoader [[
-    !!java.net.URL ["http://localhost"]
-  ]]
+  !!java.net.URLClassLoader [ [
+    !!java.net.URL [ "http://localhost" ]
+  ] ]
 ]

@@ -91,12 +91,14 @@
                         <div ng-if="!toRollbackNamespace.isPropertiesFormat"
                              ng-repeat="change in toRollbackNamespace.releaseCompareResult">
                             <h5>{{'Component.Rollback.RollbackBeforeValue' | translate }}</h5>
-                            <textarea class="form-control no-radius" ng-bind="change.entity.firstEntity.value" ng-disabled="true"
+                            <textarea class="form-control no-radius" ng-bind="change.entity.firstEntity.value"
+                                      ng-disabled="true"
                                       rows="20">
                                             </textarea>
                             <hr>
                             <h5>{{'Component.Rollback.RollbackAfterValue' | translate }}</h5>
-                            <textarea class="form-control no-radius" ng-bind="change.entity.secondEntity.value" ng-disabled="true"
+                            <textarea class="form-control no-radius" ng-bind="change.entity.secondEntity.value"
+                                      ng-disabled="true"
                                       rows="20">
                                             </textarea>
                         </div>

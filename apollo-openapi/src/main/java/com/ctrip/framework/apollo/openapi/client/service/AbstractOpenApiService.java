@@ -32,73 +32,72 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 abstract class AbstractOpenApiService {
-  private final String baseUrl;
+    protected final CloseableHttpClient client;
+    protected final Gson gson;
+    private final String baseUrl;
 
-  protected final CloseableHttpClient client;
-  protected final Gson gson;
-
-  AbstractOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
-    this.client = client;
-    this.baseUrl = baseUrl;
-    this.gson = gson;
-  }
-
-  protected CloseableHttpResponse get(OpenApiPathBuilder path) throws IOException {
-    HttpGet get = new HttpGet(path.buildPath(baseUrl));
-
-    return execute(get);
-  }
-
-  protected CloseableHttpResponse post(OpenApiPathBuilder path, Object entity) throws IOException {
-    HttpPost post = new HttpPost(path.buildPath(baseUrl));
-
-    return execute(post, entity);
-  }
-
-  protected CloseableHttpResponse put(OpenApiPathBuilder path, Object entity) throws IOException {
-    HttpPut put = new HttpPut(path.buildPath(baseUrl));
-
-    return execute(put, entity);
-  }
-
-  protected CloseableHttpResponse delete(OpenApiPathBuilder path) throws IOException {
-    HttpDelete delete = new HttpDelete(path.buildPath(baseUrl));
-
-    return execute(delete);
-  }
-
-  private CloseableHttpResponse execute(HttpEntityEnclosingRequestBase requestBase, Object entity) throws IOException {
-    requestBase.setEntity(new StringEntity(gson.toJson(entity), ContentType.APPLICATION_JSON));
-
-    return execute(requestBase);
-  }
-
-  private CloseableHttpResponse execute(HttpUriRequest request) throws IOException {
-    CloseableHttpResponse response = client.execute(request);
-
-    checkHttpResponseStatus(response);
-
-    return response;
-  }
-
-  private void checkHttpResponseStatus(HttpResponse response) {
-    if (response.getStatusLine().getStatusCode() == 200) {
-      return;
+    AbstractOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
+        this.client = client;
+        this.baseUrl = baseUrl;
+        this.gson = gson;
     }
 
-    StatusLine status = response.getStatusLine();
-    String message = "";
-    try {
-      message = EntityUtils.toString(response.getEntity());
-    } catch (IOException e) {
-      //ignore
+    protected CloseableHttpResponse get(OpenApiPathBuilder path) throws IOException {
+        HttpGet get = new HttpGet(path.buildPath(baseUrl));
+
+        return execute(get);
     }
 
-    throw new ApolloOpenApiException(status.getStatusCode(), status.getReasonPhrase(), message);
-  }
+    protected CloseableHttpResponse post(OpenApiPathBuilder path, Object entity) throws IOException {
+        HttpPost post = new HttpPost(path.buildPath(baseUrl));
 
-  protected void checkNotEmpty(String value, String name) {
-    Preconditions.checkArgument(!Strings.isNullOrEmpty(value), name + " should not be null or empty");
-  }
+        return execute(post, entity);
+    }
+
+    protected CloseableHttpResponse put(OpenApiPathBuilder path, Object entity) throws IOException {
+        HttpPut put = new HttpPut(path.buildPath(baseUrl));
+
+        return execute(put, entity);
+    }
+
+    protected CloseableHttpResponse delete(OpenApiPathBuilder path) throws IOException {
+        HttpDelete delete = new HttpDelete(path.buildPath(baseUrl));
+
+        return execute(delete);
+    }
+
+    private CloseableHttpResponse execute(HttpEntityEnclosingRequestBase requestBase, Object entity) throws IOException {
+        requestBase.setEntity(new StringEntity(gson.toJson(entity), ContentType.APPLICATION_JSON));
+
+        return execute(requestBase);
+    }
+
+    private CloseableHttpResponse execute(HttpUriRequest request) throws IOException {
+        CloseableHttpResponse response = client.execute(request);
+
+        checkHttpResponseStatus(response);
+
+        return response;
+    }
+
+    private void checkHttpResponseStatus(HttpResponse response) {
+        if (response.getStatusLine().getStatusCode() == 200) {
+            return;
+        }
+
+        StatusLine status = response.getStatusLine();
+        String message = "";
+        try {
+            message = EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            //ignore
+        }
+
+        throw new ApolloOpenApiException(status.getStatusCode(), status.getReasonPhrase(), message);
+    }
+
+    protected void checkNotEmpty(String value, String name) {
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(value), name + " should not be null or empty");
+    }
 
 }

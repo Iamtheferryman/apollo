@@ -16,8 +16,6 @@
  */
 package com.ctrip.framework.apollo.metaservice.service;
 
-import java.util.List;
-
 import com.ctrip.framework.apollo.core.dto.ServiceDTO;
 import com.google.common.collect.Lists;
 import org.junit.Before;
@@ -25,9 +23,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryClient;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

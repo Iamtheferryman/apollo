@@ -24,12 +24,12 @@ import com.ctrip.framework.apollo.openapi.dto.OpenReleaseDTO;
  */
 public interface ReleaseOpenApiService {
 
-  OpenReleaseDTO publishNamespace(String appId, String env, String clusterName,
-      String namespaceName,
-      NamespaceReleaseDTO releaseDTO);
+    OpenReleaseDTO publishNamespace(String appId, String env, String clusterName,
+                                    String namespaceName,
+                                    NamespaceReleaseDTO releaseDTO);
 
-  OpenReleaseDTO getLatestActiveRelease(String appId, String env, String clusterName,
-      String namespaceName);
+    OpenReleaseDTO getLatestActiveRelease(String appId, String env, String clusterName,
+                                          String namespaceName);
 
-  void rollbackRelease(String env, long releaseId, String operator);
+    void rollbackRelease(String env, long releaseId, String operator);
 }

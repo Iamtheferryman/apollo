@@ -27,166 +27,166 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
 public class ItemOpenApiService extends AbstractOpenApiService implements
-    com.ctrip.framework.apollo.openapi.api.ItemOpenApiService {
+        com.ctrip.framework.apollo.openapi.api.ItemOpenApiService {
 
-  public ItemOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
-    super(client, baseUrl, gson);
-  }
-
-  @Override
-  public OpenItemDTO getItem(String appId, String env, String clusterName, String namespaceName, String key) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+    public ItemOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
+        super(client, baseUrl, gson);
     }
 
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-    checkNotEmpty(key, "Item key");
+    @Override
+    public OpenItemDTO getItem(String appId, String env, String clusterName, String namespaceName, String key) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
 
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .itemsPathVal(key);
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+        checkNotEmpty(key, "Item key");
 
-    try (CloseableHttpResponse response = get(pathBuilder)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenItemDTO.class);
-    } catch (Throwable ex) {
-      // return null if item doesn't exist
-      if (ex instanceof ApolloOpenApiException && ((ApolloOpenApiException)ex).getStatus() == 404) {
-        return null;
-      }
-      throw new RuntimeException(String
-          .format("Get item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", key, appId, clusterName,
-              namespaceName, env), ex);
-    }
-  }
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .itemsPathVal(key);
 
-  @Override
-  public OpenItemDTO createItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
-    }
-
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-    checkNotEmpty(itemDTO.getKey(), "Item key");
-    checkNotEmpty(itemDTO.getDataChangeCreatedBy(), "Item created by");
-
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .customResource("items");
-
-    try (CloseableHttpResponse response = post(pathBuilder, itemDTO)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenItemDTO.class);
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Create item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
-              appId, clusterName, namespaceName, env), ex);
-    }
-  }
-
-  @Override
-  public void updateItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        try (CloseableHttpResponse response = get(pathBuilder)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenItemDTO.class);
+        } catch (Throwable ex) {
+            // return null if item doesn't exist
+            if (ex instanceof ApolloOpenApiException && ((ApolloOpenApiException) ex).getStatus() == 404) {
+                return null;
+            }
+            throw new RuntimeException(String
+                    .format("Get item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", key, appId, clusterName,
+                            namespaceName, env), ex);
+        }
     }
 
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-    checkNotEmpty(itemDTO.getKey(), "Item key");
-    checkNotEmpty(itemDTO.getDataChangeLastModifiedBy(), "Item modified by");
+    @Override
+    public OpenItemDTO createItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
 
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .itemsPathVal(itemDTO.getKey());
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+        checkNotEmpty(itemDTO.getKey(), "Item key");
+        checkNotEmpty(itemDTO.getDataChangeCreatedBy(), "Item created by");
 
-    try (CloseableHttpResponse ignored = put(pathBuilder, itemDTO)) {
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Update item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
-              appId, clusterName, namespaceName, env), ex);
-    }
-  }
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .customResource("items");
 
-  @Override
-  public void createOrUpdateItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
-    }
-
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-    checkNotEmpty(itemDTO.getKey(), "Item key");
-    checkNotEmpty(itemDTO.getDataChangeCreatedBy(), "Item created by");
-
-    if (Strings.isNullOrEmpty(itemDTO.getDataChangeLastModifiedBy())) {
-      itemDTO.setDataChangeLastModifiedBy(itemDTO.getDataChangeCreatedBy());
+        try (CloseableHttpResponse response = post(pathBuilder, itemDTO)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenItemDTO.class);
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Create item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
+                            appId, clusterName, namespaceName, env), ex);
+        }
     }
 
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .itemsPathVal(itemDTO.getKey())
-        .addParam("createIfNotExists", "true");
+    @Override
+    public void updateItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
 
-    try (CloseableHttpResponse ignored = put(pathBuilder, itemDTO)) {
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("CreateOrUpdate item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
-              appId, clusterName, namespaceName, env), ex);
-    }
-  }
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+        checkNotEmpty(itemDTO.getKey(), "Item key");
+        checkNotEmpty(itemDTO.getDataChangeLastModifiedBy(), "Item modified by");
 
-  @Override
-  public void removeItem(String appId, String env, String clusterName, String namespaceName, String key, String operator) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
-    }
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .itemsPathVal(itemDTO.getKey());
 
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-    checkNotEmpty(key, "Item key");
-    checkNotEmpty(operator, "Operator");
-
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .itemsPathVal(key)
-        .addParam("operator", operator);
-
-    try (CloseableHttpResponse ignored = delete(pathBuilder)) {
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Remove item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", key, appId,
-              clusterName, namespaceName, env), ex);
+        try (CloseableHttpResponse ignored = put(pathBuilder, itemDTO)) {
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Update item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
+                            appId, clusterName, namespaceName, env), ex);
+        }
     }
 
-  }
+    @Override
+    public void createOrUpdateItem(String appId, String env, String clusterName, String namespaceName, OpenItemDTO itemDTO) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
+
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+        checkNotEmpty(itemDTO.getKey(), "Item key");
+        checkNotEmpty(itemDTO.getDataChangeCreatedBy(), "Item created by");
+
+        if (Strings.isNullOrEmpty(itemDTO.getDataChangeLastModifiedBy())) {
+            itemDTO.setDataChangeLastModifiedBy(itemDTO.getDataChangeCreatedBy());
+        }
+
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .itemsPathVal(itemDTO.getKey())
+                .addParam("createIfNotExists", "true");
+
+        try (CloseableHttpResponse ignored = put(pathBuilder, itemDTO)) {
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("CreateOrUpdate item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", itemDTO.getKey(),
+                            appId, clusterName, namespaceName, env), ex);
+        }
+    }
+
+    @Override
+    public void removeItem(String appId, String env, String clusterName, String namespaceName, String key, String operator) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
+
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+        checkNotEmpty(key, "Item key");
+        checkNotEmpty(operator, "Operator");
+
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .itemsPathVal(key)
+                .addParam("operator", operator);
+
+        try (CloseableHttpResponse ignored = delete(pathBuilder)) {
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Remove item: %s for appId: %s, cluster: %s, namespace: %s in env: %s failed", key, appId,
+                            clusterName, namespaceName, env), ex);
+        }
+
+    }
 }

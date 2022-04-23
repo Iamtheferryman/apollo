@@ -23,7 +23,7 @@ import com.ctrip.framework.apollo.openapi.dto.OpenClusterDTO;
  */
 public interface ClusterOpenApiService {
 
-  OpenClusterDTO getCluster(String appId, String env, String clusterName);
+    OpenClusterDTO getCluster(String appId, String env, String clusterName);
 
-  OpenClusterDTO createCluster(String env, OpenClusterDTO openClusterDTO);
+    OpenClusterDTO createCluster(String env, OpenClusterDTO openClusterDTO);
 }

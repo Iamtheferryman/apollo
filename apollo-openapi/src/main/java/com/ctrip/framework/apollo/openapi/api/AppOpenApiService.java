@@ -18,6 +18,7 @@ package com.ctrip.framework.apollo.openapi.api;
 
 import com.ctrip.framework.apollo.openapi.dto.OpenAppDTO;
 import com.ctrip.framework.apollo.openapi.dto.OpenEnvClusterDTO;
+
 import java.util.List;
 
 /**
@@ -25,11 +26,11 @@ import java.util.List;
  */
 public interface AppOpenApiService {
 
-  List<OpenEnvClusterDTO> getEnvClusterInfo(String appId);
+    List<OpenEnvClusterDTO> getEnvClusterInfo(String appId);
 
-  List<OpenAppDTO> getAllApps();
+    List<OpenAppDTO> getAllApps();
 
-  List<OpenAppDTO> getAppsInfo(List<String> appIds);
+    List<OpenAppDTO> getAppsInfo(List<String> appIds);
 
-  List<OpenAppDTO> getAuthorizedApps();
+    List<OpenAppDTO> getAuthorizedApps();
 }

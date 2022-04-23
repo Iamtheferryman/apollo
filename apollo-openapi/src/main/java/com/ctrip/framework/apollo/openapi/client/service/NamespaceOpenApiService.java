@@ -25,119 +25,120 @@ import com.ctrip.framework.apollo.openapi.dto.OpenNamespaceLockDTO;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.List;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 public class NamespaceOpenApiService extends AbstractOpenApiService implements
-    com.ctrip.framework.apollo.openapi.api.NamespaceOpenApiService {
-  private static final Type OPEN_NAMESPACE_DTO_LIST_TYPE = new TypeToken<List<OpenNamespaceDTO>>() {
-  }.getType();
+        com.ctrip.framework.apollo.openapi.api.NamespaceOpenApiService {
+    private static final Type OPEN_NAMESPACE_DTO_LIST_TYPE = new TypeToken<List<OpenNamespaceDTO>>() {
+    }.getType();
 
-  public NamespaceOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
-    super(client, baseUrl, gson);
-  }
-
-  @Override
-  public OpenNamespaceDTO getNamespace(String appId, String env, String clusterName, String namespaceName) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+    public NamespaceOpenApiService(CloseableHttpClient client, String baseUrl, Gson gson) {
+        super(client, baseUrl, gson);
     }
 
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
+    @Override
+    public OpenNamespaceDTO getNamespace(String appId, String env, String clusterName, String namespaceName) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
 
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName);
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
 
-    try (CloseableHttpResponse response = get(pathBuilder)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenNamespaceDTO.class);
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Get namespace for appId: %s, cluster: %s, namespace: %s in env: %s failed", appId, clusterName,
-              namespaceName, env), ex);
-    }
-  }
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName);
 
-  @Override
-  public List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
-    }
-
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .customResource("namespaces");
-
-    try (CloseableHttpResponse response = get(pathBuilder)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OPEN_NAMESPACE_DTO_LIST_TYPE);
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Get namespaces for appId: %s, cluster: %s in env: %s failed", appId, clusterName, env), ex);
-    }
-  }
-
-  @Override
-  public OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO) {
-    checkNotEmpty(appNamespaceDTO.getAppId(), "App id");
-    checkNotEmpty(appNamespaceDTO.getName(), "Name");
-    checkNotEmpty(appNamespaceDTO.getDataChangeCreatedBy(), "Created by");
-
-    if (Strings.isNullOrEmpty(appNamespaceDTO.getFormat())) {
-      appNamespaceDTO.setFormat(ConfigFileFormat.Properties.getValue());
+        try (CloseableHttpResponse response = get(pathBuilder)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenNamespaceDTO.class);
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Get namespace for appId: %s, cluster: %s, namespace: %s in env: %s failed", appId, clusterName,
+                            namespaceName, env), ex);
+        }
     }
 
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .appsPathVal(appNamespaceDTO.getAppId())
-        .customResource("appnamespaces");
+    @Override
+    public List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
 
-    try (CloseableHttpResponse response = post(pathBuilder, appNamespaceDTO)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenAppNamespaceDTO.class);
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Create app namespace: %s for appId: %s, format: %s failed", appNamespaceDTO.getName(),
-              appNamespaceDTO.getAppId(), appNamespaceDTO.getFormat()), ex);
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .customResource("namespaces");
+
+        try (CloseableHttpResponse response = get(pathBuilder)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OPEN_NAMESPACE_DTO_LIST_TYPE);
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Get namespaces for appId: %s, cluster: %s in env: %s failed", appId, clusterName, env), ex);
+        }
     }
-  }
 
-  @Override
-  public OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName, String namespaceName) {
-    if (Strings.isNullOrEmpty(clusterName)) {
-      clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+    @Override
+    public OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO) {
+        checkNotEmpty(appNamespaceDTO.getAppId(), "App id");
+        checkNotEmpty(appNamespaceDTO.getName(), "Name");
+        checkNotEmpty(appNamespaceDTO.getDataChangeCreatedBy(), "Created by");
+
+        if (Strings.isNullOrEmpty(appNamespaceDTO.getFormat())) {
+            appNamespaceDTO.setFormat(ConfigFileFormat.Properties.getValue());
+        }
+
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .appsPathVal(appNamespaceDTO.getAppId())
+                .customResource("appnamespaces");
+
+        try (CloseableHttpResponse response = post(pathBuilder, appNamespaceDTO)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenAppNamespaceDTO.class);
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Create app namespace: %s for appId: %s, format: %s failed", appNamespaceDTO.getName(),
+                            appNamespaceDTO.getAppId(), appNamespaceDTO.getFormat()), ex);
+        }
     }
-    if (Strings.isNullOrEmpty(namespaceName)) {
-      namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+
+    @Override
+    public OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName, String namespaceName) {
+        if (Strings.isNullOrEmpty(clusterName)) {
+            clusterName = ConfigConsts.CLUSTER_NAME_DEFAULT;
+        }
+        if (Strings.isNullOrEmpty(namespaceName)) {
+            namespaceName = ConfigConsts.NAMESPACE_APPLICATION;
+        }
+
+        checkNotEmpty(appId, "App id");
+        checkNotEmpty(env, "Env");
+
+        OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
+                .envsPathVal(env)
+                .appsPathVal(appId)
+                .clustersPathVal(clusterName)
+                .namespacesPathVal(namespaceName)
+                .customResource("lock");
+
+        try (CloseableHttpResponse response = get(pathBuilder)) {
+            return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenNamespaceLockDTO.class);
+        } catch (Throwable ex) {
+            throw new RuntimeException(String
+                    .format("Get namespace lock for appId: %s, cluster: %s, namespace: %s in env: %s failed", appId, clusterName,
+                            namespaceName, env), ex);
+        }
     }
-
-    checkNotEmpty(appId, "App id");
-    checkNotEmpty(env, "Env");
-
-    OpenApiPathBuilder pathBuilder = OpenApiPathBuilder.newBuilder()
-        .envsPathVal(env)
-        .appsPathVal(appId)
-        .clustersPathVal(clusterName)
-        .namespacesPathVal(namespaceName)
-        .customResource("lock");
-
-    try (CloseableHttpResponse response = get(pathBuilder)) {
-      return gson.fromJson(EntityUtils.toString(response.getEntity()), OpenNamespaceLockDTO.class);
-    } catch (Throwable ex) {
-      throw new RuntimeException(String
-          .format("Get namespace lock for appId: %s, cluster: %s, namespace: %s in env: %s failed", appId, clusterName,
-              namespaceName, env), ex);
-    }
-  }
 }

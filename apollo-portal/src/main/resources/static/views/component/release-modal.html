@@ -99,7 +99,8 @@
                                         }}</span>
                                     <span class="label label-info"
                                           data-placement="bottom"
-                                          data-tooltip="tooltip" ng-if="config.isModified && config.oldValue && !config.isDeleted"
+                                          data-tooltip="tooltip"
+                                          ng-if="config.isModified && config.oldValue && !config.isDeleted"
                                           title="{{'Component.Publish.ModifiedTips' | translate }}">{{'Component.Publish.Modified' | translate
                                         }}</span>
                                     <span class="label label-danger" data-placement="bottom" data-tooltip="tooltip"
@@ -264,14 +265,16 @@
                         {{'Component.Publish.Release' | translate }}
                     </label>
                     <div class="col-sm-5" valdr-form-group>
-                        <input class="form-control" name="releaseName" ng-model="toReleaseNamespace.releaseTitle" ng-required="true"
+                        <input class="form-control" name="releaseName" ng-model="toReleaseNamespace.releaseTitle"
+                               ng-required="true"
                                placeholder="input release name" type="text">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">{{'Component.Publish.ReleaseComment' | translate }}</label>
                     <div class="col-sm-10" valdr-form-group>
-                        <textarea class="form-control" name="comment" ng-model="releaseComment" placeholder="Add an optional extended description..."
+                        <textarea class="form-control" name="comment" ng-model="releaseComment"
+                                  placeholder="Add an optional extended description..."
                                   rows="4"
                                   style="margin-top: 15px;"></textarea>
                     </div>

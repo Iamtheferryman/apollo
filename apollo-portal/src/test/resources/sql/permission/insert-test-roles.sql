@@ -13,5 +13,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 --
-INSERT INTO `role` (`Id`, `RoleName`) VALUES (990, 'someRoleName');
-INSERT INTO `role` (`Id`, `RoleName`) VALUES (991, 'anotherRoleName');
+INSERT INTO `role` (`Id`, `RoleName`)
+VALUES (990, 'someRoleName');
+INSERT INTO `role` (`Id`, `RoleName`)
+VALUES (991, 'anotherRoleName');

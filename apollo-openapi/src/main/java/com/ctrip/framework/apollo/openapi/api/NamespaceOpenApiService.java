@@ -19,6 +19,7 @@ package com.ctrip.framework.apollo.openapi.api;
 import com.ctrip.framework.apollo.openapi.dto.OpenAppNamespaceDTO;
 import com.ctrip.framework.apollo.openapi.dto.OpenNamespaceDTO;
 import com.ctrip.framework.apollo.openapi.dto.OpenNamespaceLockDTO;
+
 import java.util.List;
 
 /**
@@ -26,12 +27,12 @@ import java.util.List;
  */
 public interface NamespaceOpenApiService {
 
-  OpenNamespaceDTO getNamespace(String appId, String env, String clusterName, String namespaceName);
+    OpenNamespaceDTO getNamespace(String appId, String env, String clusterName, String namespaceName);
 
-  List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName);
+    List<OpenNamespaceDTO> getNamespaces(String appId, String env, String clusterName);
 
-  OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO);
+    OpenAppNamespaceDTO createAppNamespace(OpenAppNamespaceDTO appNamespaceDTO);
 
-  OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName,
-      String namespaceName);
+    OpenNamespaceLockDTO getNamespaceLock(String appId, String env, String clusterName,
+                                          String namespaceName);
 }

@@ -14,5 +14,4 @@
 -- limitations under the License.
 --
 INSERT INTO `ServerConfig` (`Key`, `Cluster`, `Value`)
-VALUES
-	('admin-service.access.control.enabled', 'default', 'true');
+VALUES ('admin-service.access.control.enabled', 'default', 'true');

@@ -14,6 +14,5 @@
 -- limitations under the License.
 --
 INSERT INTO `ServerConfig` (`Key`, `Cluster`, `Value`)
-VALUES
-	('admin-service.access.tokens', 'default', 'someToken,anotherToken'),
-	('admin-service.access.control.enabled', 'default', 'false');
+VALUES ('admin-service.access.tokens', 'default', 'someToken,anotherToken'),
+       ('admin-service.access.control.enabled', 'default', 'false');

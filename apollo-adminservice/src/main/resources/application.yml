@@ -26,7 +26,7 @@ spring:
 
 ctrip:
   appid: 100003172
-  
+
 server:
   port: 8090
 

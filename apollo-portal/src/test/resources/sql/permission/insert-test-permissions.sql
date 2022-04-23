@@ -13,5 +13,7 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 --
-INSERT INTO `permission` (`Id`, `PermissionType`, `TargetId`) VALUES (990, 'somePermissionType', 'someTargetId');
-INSERT INTO `permission` (`Id`, `PermissionType`, `TargetId`) VALUES (991, 'anotherPermissionType', 'anotherTargetId');
+INSERT INTO `permission` (`Id`, `PermissionType`, `TargetId`)
+VALUES (990, 'somePermissionType', 'someTargetId');
+INSERT INTO `permission` (`Id`, `PermissionType`, `TargetId`)
+VALUES (991, 'anotherPermissionType', 'anotherTargetId');

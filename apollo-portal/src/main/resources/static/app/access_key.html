@@ -43,7 +43,8 @@
                     </h4>
                 </div>
                 <div class="col-md-3 text-right">
-                    <a class="btn btn-info" data-dismiss="modal" href="{{ '/config.html' | prefixPath }}?#appid={{pageContext.appId}}"
+                    <a class="btn btn-info" data-dismiss="modal"
+                       href="{{ '/config.html' | prefixPath }}?#appid={{pageContext.appId}}"
                        type="button">{{'Common.ReturnToIndex' | translate
                         }}
                     </a>
@@ -79,7 +80,8 @@
                                     <option ng-repeat="env in envs" ng-value="env">{{env}}</option>
                                 </select>
                             </div>
-                            <button class="btn btn-default" ng-disabled="addAccessKeySelectedEnv == ''" style="margin-left: 20px;"
+                            <button class="btn btn-default" ng-disabled="addAccessKeySelectedEnv == ''"
+                                    style="margin-left: 20px;"
                                     type="submit">{{'App.Setting.Add' | translate }}
                             </button>
                         </form>

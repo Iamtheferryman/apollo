@@ -13,11 +13,18 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 --
-DELETE FROM Item;
-DELETE FROM Namespace;
-DELETE FROM AppNamespace;
-DELETE FROM Cluster;
-DELETE FROM App;
-DELETE FROM NamespaceLock;
-DELETE FROM ServerConfig;
+DELETE
+FROM Item;
+DELETE
+FROM Namespace;
+DELETE
+FROM AppNamespace;
+DELETE
+FROM Cluster;
+DELETE
+FROM App;
+DELETE
+FROM NamespaceLock;
+DELETE
+FROM ServerConfig;
 
