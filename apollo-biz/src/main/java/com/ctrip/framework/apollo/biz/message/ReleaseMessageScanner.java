@@ -43,16 +43,28 @@ import java.util.concurrent.TimeUnit;
  * @author Jason Song(song_s@ctrip.com)
  */
 public class ReleaseMessageScanner implements InitializingBean {
+
     private static final Logger logger = LoggerFactory.getLogger(ReleaseMessageScanner.class);
-    private static final int missingReleaseMessageMaxAge = 10; // hardcoded to 10, could be configured via BizConfig if necessary
+
+    // hardcoded to 10, could be configured via BizConfig if necessary
+    // 最多通知10次
+    private static final int missingReleaseMessageMaxAge = 10;
+
     private final List<ReleaseMessageListener> listeners;
+
     private final ScheduledExecutorService executorService;
-    private final Map<Long, Integer> missingReleaseMessages; // missing release message id => age counter
+
+    // missing release message id => age counter
+    private final Map<Long, Integer> missingReleaseMessages;
+
     @Autowired
     private BizConfig bizConfig;
+
     @Autowired
     private ReleaseMessageRepository releaseMessageRepository;
+
     private int databaseScanInterval;
+
     private long maxIdScanned;
 
     public ReleaseMessageScanner() {
@@ -110,15 +122,19 @@ public class ReleaseMessageScanner implements InitializingBean {
      */
     private boolean scanAndSendMessages() {
         //current batch is 500
+        // 查找500条大于指定id的正序数据
         List<ReleaseMessage> releaseMessages =
                 releaseMessageRepository.findFirst500ByIdGreaterThanOrderByIdAsc(maxIdScanned);
         if (CollectionUtils.isEmpty(releaseMessages)) {
             return false;
         }
         fireMessageScanned(releaseMessages);
+        // 共查询出多少条数据
         int messageScanned = releaseMessages.size();
         long newMaxIdScanned = releaseMessages.get(messageScanned - 1).getId();
         // check id gaps, possible reasons are release message not committed yet or already rolled back
+        // 回滚可以理解，尚未提交是什么意思
+        // id的差值大于数据条数
         if (newMaxIdScanned - maxIdScanned > messageScanned) {
             recordMissingReleaseMessageIds(releaseMessages, maxIdScanned);
         }

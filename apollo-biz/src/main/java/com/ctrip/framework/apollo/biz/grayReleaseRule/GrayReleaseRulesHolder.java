@@ -51,21 +51,27 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class GrayReleaseRulesHolder implements ReleaseMessageListener, InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(GrayReleaseRulesHolder.class);
+
     private static final Joiner STRING_JOINER = Joiner.on(ConfigConsts.CLUSTER_NAMESPACE_SEPARATOR);
     private static final Splitter STRING_SPLITTER =
             Splitter.on(ConfigConsts.CLUSTER_NAMESPACE_SEPARATOR).omitEmptyStrings();
 
     @Autowired
     private GrayReleaseRuleRepository grayReleaseRuleRepository;
+
     @Autowired
     private BizConfig bizConfig;
 
     private int databaseScanInterval;
+
     private ScheduledExecutorService executorService;
+
     //store configAppId+configCluster+configNamespace -> GrayReleaseRuleCache map
     private Multimap<String, GrayReleaseRuleCache> grayReleaseRuleCache;
+
     //store clientAppId+clientNamespace+ip -> ruleId map
     private Multimap<String, Long> reversedGrayReleaseRuleCache;
+
     //an auto increment version to indicate the age of rules
     private AtomicLong loadVersion;
 

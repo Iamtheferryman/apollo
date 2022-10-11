@@ -42,10 +42,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Component
 public class DatabaseMessageSender implements MessageSender {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseMessageSender.class);
+
     private static final int CLEAN_QUEUE_MAX_SIZE = 100;
+
     private final ExecutorService cleanExecutorService;
+
     private final AtomicBoolean cleanStopped;
+
     private final ReleaseMessageRepository releaseMessageRepository;
+
+    // 链式队列，队列容量不足或为0时，自动阻塞
     private BlockingQueue<Long> toClean = Queues.newLinkedBlockingQueue(CLEAN_QUEUE_MAX_SIZE);
 
     public DatabaseMessageSender(final ReleaseMessageRepository releaseMessageRepository) {
@@ -78,6 +84,9 @@ public class DatabaseMessageSender implements MessageSender {
         }
     }
 
+    /**
+     * 项目启动完成后，开启数据清除调度任务
+     */
     @PostConstruct
     private void initialize() {
         cleanExecutorService.submit(() -> {
@@ -104,6 +113,8 @@ public class DatabaseMessageSender implements MessageSender {
         }
         boolean hasMore = true;
         while (hasMore && !Thread.currentThread().isInterrupted()) {
+            // 查找message相等且id小于指定id且id从小到大排序的前100条数据,注意是小于,新发布的那条会保留下来
+            // message = ReleaseMessageKeyGenerator.generate(appId, clusterName, namespaceName)
             List<ReleaseMessage> messages = releaseMessageRepository.findFirst100ByMessageAndIdLessThanOrderByIdAsc(
                     releaseMessage.getMessage(), releaseMessage.getId());
 

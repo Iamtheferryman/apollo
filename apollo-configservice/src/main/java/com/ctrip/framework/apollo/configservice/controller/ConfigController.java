@@ -49,14 +49,21 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/configs")
 public class ConfigController {
+
     private static final Splitter X_FORWARDED_FOR_SPLITTER = Splitter.on(",").omitEmptyStrings()
             .trimResults();
+
     private static final Type configurationTypeReference = new TypeToken<Map<String, String>>() {
     }.getType();
+
     private final ConfigService configService;
+
     private final AppNamespaceServiceWithCache appNamespaceService;
+
     private final NamespaceUtil namespaceUtil;
+
     private final InstanceConfigAuditUtil instanceConfigAuditUtil;
+
     private final Gson gson;
 
     public ConfigController(
